@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
+<title>ZYNORA — The Future of Everything</title>
+<style>
+:root{--bg:#08090d;--panel:#11131b;--panel2:#191c27;--text:#f7f7fb;--muted:#999daf;--line:#292c3a;--accent:#8b5cf6;--pink:#ec4899;--blue:#38bdf8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.app{max-width:1440px;margin:auto}
+header{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#08090ded;backdrop-filter:blur(16px);z-index:5}
+.logo{font-size:25px;font-weight:900;letter-spacing:2px;background:linear-gradient(100deg,#fff,#b69cff,#ec4899);color:transparent;background-clip:text}
+.header-right{display:flex;align-items:center;gap:10px}
+button,.btn{border:0;border-radius:10px;padding:10px 14px;background:var(--panel2);color:white}
+.primary{background:linear-gradient(100deg,#7c3aed,#db2777);font-weight:700}
+.ghost{border:1px solid var(--line);background:transparent}
+.layout{display:grid;grid-template-columns:220px minmax(0,650px) 260px;gap:24px;justify-content:center;padding:24px 16px}
+.sidebar{position:sticky;top:88px;height:max-content}
+.navbtn{display:flex;align-items:center;gap:12px;width:100%;margin:5px 0;text-align:left;background:transparent;color:#b7b9c9;padding:13px}
+.navbtn.active,.navbtn:hover{background:var(--panel2);color:#fff}
+.navicon{width:25px;font-size:20px;text-align:center}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:16px}
+h2,h3,p{margin-top:0}
+h2{font-size:20px}
+h3{font-size:16px}
+.muted{color:var(--muted);font-size:13px;line-height:1.5}
+input,textarea{width:100%;padding:12px 13px;background:#090a10;border:1px solid var(--line);border-radius:10px;color:white;outline:none;margin:6px 0}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:76px}
+.row{display:flex;align-items:center;gap:10px}
+.row>*{min-width:0}
+.between{justify-content:space-between}
+.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#302546;flex-shrink:0}
+.avatar.small{width:32px;height:32px}
+.stories{display:flex;gap:14px;overflow-x:auto;padding:8px 2px 17px}
+.story{min-width:65px;text-align:center;font-size:12px;color:#c8c8d6}
+.story-ring{width:58px;height:58px;border-radius:50%;padding:3px;margin:0 auto 7px;background:linear-gradient(135deg,#8b5cf6,#ec4899,#f59e0b)}
+.story-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid var(--bg)}
+.post{overflow:hidden;padding:0}
+.post-head{padding:15px;display:flex;align-items:center;gap:10px}
+.post-content{padding:0 15px 14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.post-media{display:block;width:100%;max-height:650px;object-fit:contain;background:#050506}
+.post-actions{display:flex;gap:8px;padding:12px 15px;border-top:1px solid var(--line);flex-wrap:wrap}
+.action{background:transparent;padding:7px 9px;color:#c5c5d5}
+.action:hover,.liked{color:#fb7185}
+.comment-area{padding:0 15px 15px}
+.comment{padding:8px 0;font-size:13px;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.auth-wrap{max-width:430px;margin:9vh auto;padding:18px}
+.auth-card{background:var(--panel);border:1px solid var(--line);padding:26px;border-radius:20px}
+.auth-card .logo{display:block;text-align:center;font-size:32px;margin-bottom:8px}
+.auth-card h2{text-align:center}
+.auth-card button{width:100%;margin-top:9px}
+.notice{padding:12px;border-radius:10px;background:#201b31;color:#d8c8ff;font-size:13px;margin:12px 0;overflow-wrap:anywhere}
+.error{color:#fda4af}.success{color:#86efac}
+.profile-cover{height:100px;background:linear-gradient(120deg,#5b21b6,#be185d,#0369a1);border-radius:12px;margin-bottom:-28px}
+.profile-big{width:78px;height:78px;border:4px solid var(--panel);border-radius:50%;object-fit:cover}
+.stat{flex:1;text-align:center;background:var(--panel2);padding:12px 4px;border-radius:10px}
+.stat strong{display:block;font-size:18px}
+.stat span{font-size:11px;color:var(--muted)}
+.grid-posts{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.grid-posts img,.grid-posts video{width:100%;aspect-ratio:1;object-fit:cover;background:#171824}
+.bottom-nav{display:none}
+footer{color:#777b8c;text-align:center;font-size:11px;padding:20px}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#242331;border:1px solid #474055;padding:12px 18px;border-radius:12px;z-index:20;max-width:90%;display:none}
+.loader{text-align:center;padding:28px;color:var(--muted)}
+@media(max-width:1000px){.layout{grid-template-columns:190px minmax(0,650px)}.rightbar{display:none}}
+@media(max-width:650px){
+ header{padding:0 13px;height:58px}.layout{display:block;padding:12px 10px 78px}.sidebar{display:none}
+ .bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#0d0e15f5;border-top:1px solid var(--line);padding:8px 2px calc(8px + env(safe-area-inset-bottom));z-index:10}
+ .bottom-nav button{background:transparent;padding:7px 9px;font-size:19px}
+ .bottom-nav span{display:block;font-size:10px;margin-top:3px}
+ .panel{padding:13px}.post-head{padding:12px}.post-content{padding:0 12px 12px}.post-actions{padding:8px}
+ .auth-wrap{margin:5vh auto;padding:12px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">ZYNORA</div>
+  <div class="header-right">
+    <span id="headerUser" class="muted"></span>
+    <button class="ghost" id="headerAuth" onclick="authAction()">Login</button>
+  </div>
+</header>
+
+<section id="authScreen" class="auth-wrap">
+  <div class="auth-card">
+    <div class="logo">ZYNORA</div>
+    <p class="muted" style="text-align:center">The Future of Everything</p>
+    <h2 id="authTitle">Join the new digital world</h2>
+    <p class="muted" style="text-align:center">Create your account and share your world.</p>
+    <div id="authMessage" class="notice hidden"></div>
+    <form id="authForm">
+      <input id="authName" placeholder="Your display name" maxlength="40" autocomplete="name">
+      <input id="authEmail" type="email" placeholder="Email address" required autocomplete="email">
+      <input id="authPassword" type="password" placeholder="Password (at least 6 characters)" required minlength="6" autocomplete="current-password">
+      <button class="primary" id="authSubmit" type="submit">Create account</button>
+    </form>
+    <button class="ghost" id="googleBtn" type="button">Continue with Google</button>
+    <button class="ghost" id="toggleAuth" type="button">Already have an account? Login</button>
+    <p class="muted" style="text-align:center;margin-top:20px">MADE IN MIAN ABDULLAH</p>
+  </div>
+</section>
+
+<div id="mainApp" class="layout hidden">
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="logo" style="font-size:20px">ZYNORA</div>
+      <p class="muted">Your world. Your people.</p>
+      <button class="navbtn active" data-page="home"><span class="navicon">⌂</span> Home Feed</button>
+      <button class="navbtn" data-page="reels"><span class="navicon">▶</span> Videos</button>
+      <button class="navbtn" data-page="create"><span class="navicon">＋</span> Create Post</button>
+      <button class="navbtn" data-page="profile"><span class="navicon">◎</span> My Profile</button>
+      <button class="navbtn" data-page="settings"><span class="navicon">⚙</span> Settings</button>
+    </div>
+    <div class="panel muted">Share your creativity. Respect your community.</div>
+  </aside>
+
+  <main>
+    <section id="homePage">
+      <div class="panel">
+        <div class="row between">
+          <div><h3 style="margin-bottom:4px">Your moments</h3><div class="muted">Stories from your world</div></div>
+          <button class="primary" onclick="go('create')">＋ Create</button>
+        </div>
+        <div class="stories" id="stories"><div class="muted">Sign in to see creators.</div></div>
+      </div>
+      <div id="feedStatus" class="muted" style="padding:8px"></div>
+      <div id="feed"></div>
+      <button class="ghost" style="width:100%;margin:10px 0" id="moreBtn">Refresh feed</button>
+    </section>
+
+    <section id="createPage" class="hidden">
+      <div class="panel">
+        <h2>Create a post</h2>
+        <p class="muted">Share a photo, video, or a thought with the community.</p>
+        <form id="postForm">
+          <textarea id="postText" maxlength="2000" placeholder="What's happening in your world?"></textarea>
+          <label class="muted">Choose a photo or video (maximum 20 MB)</label>
+          <input id="postFile" type="file" accept="image/*,video/*">
+          <div id="uploadStatus" class="muted"></div>
+          <button class="primary" id="publishBtn" type="submit" style="width:100%">Publish post</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="profilePage" class="hidden">
+      <div class="panel">
+        <div class="profile-cover"></div>
+        <div class="row between" style="align-items:end">
+          <div class="row">
+            <img id="profileAvatar" class="profile-big" alt="Profile photo">
+            <div><h2 id="profileName" style="margin:0 0 4px">My Profile</h2><div class="muted" id="profileEmail"></div></div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:18px">
+          <div class="stat"><strong id="myPostCount">0</strong><span>Posts</span></div>
+          <div class="stat"><strong id="myFollowerCount">0</strong><span>Followers</span></div>
+          <div class="stat"><strong id="myFollowingCount">0</strong><span>Following</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Edit profile</h3>
+        <form id="profileForm">
+          <input id="editName" maxlength="40" placeholder="Display name">
+          <label class="muted">Profile photo</label>
+          <input id="avatarFile" type="file" accept="image/*">
+          <button class="primary" type="submit">Save profile</button>
+        </form>
+      </div>
+      <h3>Your posts</h3>
+      <div id="profilePosts" class="grid-posts"></div>
+    </section>
+
+    <section id="reelsPage" class="hidden">
+      <div class="panel"><h2>Videos</h2><p class="muted">Scroll through community videos.</p></div>
+      <div id="reelsFeed"></div>
+    </section>
+
+    <section id="settingsPage" class="hidden">
+      <div class="panel">
+        <h2>Settings</h2>
+        <p class="muted">Manage your account and app preferences.</p>
+        <div class="row between"><span>Account</span><span id="settingsEmail" class="muted"></span></div>
+        <hr style="border-color:var(--line);margin:16px 0">
+        <button class="ghost" onclick="go('profile')">Edit profile</button>
+        <button class="ghost" onclick="refreshFeed()">Refresh posts</button>
+        <button class="primary" style="background:#9f1239;margin-top:14px" onclick="logout()">Log out</button>
+      </div>
+      <div class="panel">
+        <h3>About ZYNORA</h3>
+        <p class="muted">A growing digital platform for creators, videos, communities, and ideas.</p>
+        <p class="muted">MADE IN MIAN ABDULLAH</p>
+      </div>
+    </section>
+  </main>
+
+  <aside class="rightbar">
+    <div class="panel">
+      <h3>Your account</h3>
+      <div class="row">
+        <img id="sideAvatar" class="avatar" alt="">
+        <div><strong id="sideName">Creator</strong><div class="muted">Welcome to ZYNORA</div></div>
+      </div>
+      <button class="ghost" style="width:100%;margin-top:14px" onclick="go('profile')">View profile</button>
+    </div>
+    <div class="panel">
+      <h3>Discover</h3>
+      <p class="muted">Post your first photo or video, find creators, and start building your community.</p>
+      <button class="primary" style="width:100%" onclick="go('create')">Create something</button>
+    </div>
+    <footer>© <span id="year"></span> ZYNORA<br>MADE IN MIAN ABDULLAH</footer>
+  </aside>
+</div>
+
+<nav class="bottom-nav hidden" id="bottomNav">
+  <button data-page="home">⌂<span>Home</span></button>
+  <button data-page="reels">▶<span>Videos</span></button>
+  <button data-page="create">＋<span>Create</span></button>
+  <button data-page="profile">◎<span>Profile</span></button>
+  <button data-page="settings">⚙<span>Settings</span></button>
+</nav>
+<div id="toast"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  GoogleAuthProvider, signInWithPopup, onAuthStateChanged, updateProfile,
+  signOut
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc,
+  query, orderBy, limit, onSnapshot, serverTimestamp, arrayUnion,
+  arrayRemove, where, getDocs, increment
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import {
+  getStorage, ref, uploadBytesResumable, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
+
+/* IMPORTANT: Replace these values with your own Firebase Web App config. */
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "PASTE_YOUR_FIREBASE_APP_ID"
+};
+
+const $ = id => document.getElementById(id);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+const googleProvider = new GoogleAuthProvider();
+
+let currentUser = null;
+let isSignup = true;
+let unsubscribeFeed = null;
+let unsubscribeProfile = null;
+let unsubscribeStories = null;
+let cachedPosts = [];
+let cachedProfiles = {};
+
+const placeholderAvatar = "https://ui-avatars.com/api/?name=Z&background=302546&color=fff";
+const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[ch]));
+
+function toast(message) {
+  $("toast").textContent = message;
+  $("toast").style.display = "block";
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => $("toast").style.display = "none", 3500);
+}
+function setAuthMessage(message, error=false) {
+  $("authMessage").textContent = message;
+  $("authMessage").classList.remove("hidden");
+  $("authMessage").classList.toggle("error", error);
+}
+function showAuth() {
+  $("authScreen").classList.remove("hidden");
+  $("mainApp").classList.add("hidden");
+  $("bottomNav").classList.add("hidden");
+}
+function showMain() {
+  $("authScreen").classList.add("hidden");
+  $("mainApp").classList.remove("hidden");
+  $("bottomNav").classList.remove("hidden");
+}
+function friendlyError(error) {
+  const messages = {
+    "auth/email-already-in-use":"This email already has an account. Please log in.",
+    "auth/invalid-email":"Please enter a valid email address.",
+    "auth/weak-password":"Use a stronger password with at least 6 characters.",
+    "auth/invalid-credential":"Email or password is incorrect.",
+    "auth/user-not-found":"Account not found. Please sign up.",
+    "auth/popup-closed-by-user":"Google sign-in was cancelled.",
+    "auth/unauthorized-domain":"Add this website's domain in Firebase Authentication → Settings → Authorized domains.",
+    "permission-denied":"Firebase permissions denied. Check your Firestore or Storage rules.",
+    "storage/unauthorized":"Storage upload blocked. Check Firebase Storage setup and rules."
+  };
+  return messages[error?.code] || error?.message || "Something went wrong. Please try again.";
+}
+function requireUser() {
+  if (!currentUser) throw new Error("Please log in first.");
+}
+function go(page) {
+  if (!currentUser) return showAuth();
+  document.querySelectorAll("main > section").forEach(el => el.classList.add("hidden"));
+  const target = $(page + "Page");
+  if (target) target.classList.remove("hidden");
+  document.querySelectorAll("[data-page]").forEach(btn => btn.classList.toggle("active", btn.dataset.page === page));
+  if (page === "profile") loadMyProfile();
+  if (page === "reels") renderReels();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+window.go = go;
+window.authAction = () => currentUser ? go("settings") : showAuth();
+window.logout = async () => {
+  try { await signOut(auth); toast("You have logged out."); }
+  catch (e) { toast(friendlyError(e)); }
+};
+window.refreshFeed = () => {
+  if (currentUser) startFeed();
+  toast("Refreshing posts…");
+};
+
+document.querySelectorAll("[data-page]").forEach(btn => {
+  btn.addEventListener("click", () => go(btn.dataset.page));
+});
+
+$("year").textContent = new Date().getFullYear();
+
+$("toggleAuth").addEventListener("click", () => {
+  isSignup = !isSignup;
+  $("authTitle").textContent = isSignup ? "Join the new digital world" : "Welcome back";
+  $("authName").classList.toggle("hidden", !isSignup);
+  $("authName").required = isSignup;
+  $("authSubmit").textContent = isSignup ? "Create account" : "Login";
+  $("toggleAuth").textContent = isSignup ? "Already have an account? Login" : "New here? Create account";
+  $("authMessage").classList.add("hidden");
+});
+
+$("authForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("authSubmit").disabled = true;
+  try {
+    const email = $("authEmail").value.trim();
+    const password = $("authPassword").value;
+    if (isSignup) {
+      const name = $("authName").value.trim();
+      if (!name) throw new Error("Please enter your display name.");
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(result.user, {displayName:name});
+      await setDoc(doc(db, "users", result.user.uid), {
+        uid:result.user.uid, name, email, photoURL:"",
+        followers:[], following:[], createdAt:serverTimestamp()
+      }, {merge:true});
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
+  } catch (e) {
+    setAuthMessage(friendlyError(e), true);
+  } finally {
+    $("authSubmit").disabled = false;
+  }
+});
+
+$("googleBtn").addEventListener("click", async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const u = result.user;
+    await setDoc(doc(db,"users",u.uid), {
+      uid:u.uid, name:u.displayName || "Creator", email:u.email || "",
+      photoURL:u.photoURL || "", followers:[], following:[],
+      createdAt:serverTimestamp()
+    }, {merge:true});
+  } catch (e) {
+    setAuthMessage(friendlyError(e), true);
+  }
+});
+
+onAuthStateChanged(auth, async user => {
+  currentUser = user;
+  if (!user) {
+    if (unsubscribeFeed) unsubscribeFeed();
+    if (unsubscribeProfile) unsubscribeProfile();
+    if (unsubscribeStories) unsubscribeStories();
+    showAuth();
+    $("headerAuth").textContent = "Login";
+    $("headerUser").textContent = "";
+    return;
+  }
+  showMain();
+  $("headerAuth").textContent = "Settings";
+  $("headerUser").textContent = user.displayName || user.email || "Creator";
+  try {
+    await setDoc(doc(db,"users",user.uid), {
+      uid:user.uid, name:user.displayName || "Creator",
+      email:user.email || "", photoURL:user.photoURL || ""
+    }, {merge:true});
+    await loadMyProfile();
+    startFeed();
+    startStories();
+    go("home");
+  } catch (e) {
+    toast(friendlyError(e));
+  }
+});
+
+async function getUserData(uid) {
+  if (cachedProfiles[uid]) return cachedProfiles[uid];
+  try {
+    const snap = await getDoc(doc(db,"users",uid));
+    const data = snap.exists() ? snap.data() : {};
+    cachedProfiles[uid] = data;
+    return data;
+  } catch { return {}; }
+}
+
+function avatarURL(profile) {
+  return profile?.photoURL || placeholderAvatar;
+}
+
+async function loadMyProfile() {
+  if (!currentUser) return;
+  const data = await getUserData(currentUser.uid);
+  const name = data.name || currentUser.displayName || "Creator";
+  const photo = data.photoURL || currentUser.photoURL || placeholderAvatar;
+  $("profileAvatar").src = photo;
+  $("sideAvatar").src = photo;
+  $("profileName").textContent = name;
+  $("sideName").textContent = name;
+  $("profileEmail").textContent = currentUser.email || "";
+  $("settingsEmail").textContent = currentUser.email || "";
+  $("editName").value = name;
+  $("myFollowerCount").textContent = (data.followers || []).length;
+  $("myFollowingCount").textContent = (data.following || []).length;
+  $("profilePosts").innerHTML = "";
+  try {
+    const q = query(collection(db,"posts"), where("uid","==",currentUser.uid), orderBy("createdAt","desc"), limit(30));
+    const snap = await getDocs(q);
+    $("myPostCount").textContent = snap.size;
+    if (!snap.empty) {
+      $("profilePosts").innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        if (!p.mediaURL) return `<div style="padding:8px;background:#191c27;aspect-ratio:1;overflow:hidden">${escapeHTML(p.text || "Post")}</div>`;
+        return p.mediaType === "video"
+          ? `<video src="${escapeHTML(p.mediaURL)}" controls playsinline></video>`
+          : `<img src="${escapeHTML(p.mediaURL)}" alt="Post">`;
+      }).join("");
+    }
+  } catch (e) {
+    $("myPostCount").textContent = "—";
+    console.warn("Profile posts:", e);
+  }
+}
+
+$("profileForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!currentUser) return;
+  try {
+    const name = $("editName").value.trim();
+    if (!name) throw new Error("Display name cannot be empty.");
+    let photoURL = currentUser.photoURL || "";
+    const file = $("avatarFile").files[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) throw new Error("Please choose an image.");
+      if (file.size > 5 * 1024 * 1024) throw new Error("Profile photo must be 5 MB or smaller.");
+      photoURL = await uploadFile(file, `avatars/${currentUser.uid}/${Date.now()}-${file.name}`);
+    }
+    await updateProfile(currentUser,{displayName:name,photoURL});
+    await setDoc(doc(db,"users",currentUser.uid),{name,photoURL,email:currentUser.email || ""},{merge:true});
+    cachedProfiles[currentUser.uid] = null;
+    await loadMyProfile();
+    $("headerUser").textContent = name;
+    toast("Profile updated.");
+  } catch (e) { toast(friendlyError(e)); }
+});
+
+function uploadFile(file,path) {
+  return new Promise((resolve,reject) => {
+    const task = uploadBytesResumable(ref(storage,path),file,{contentType:file.type});
+    task.on("state_changed", snap => {
+      const percent = Math.round(snap.bytesTransferred / snap.totalBytes * 100);
+      $("uploadStatus").textContent = `Uploading… ${percent}%`;
+    }, reject, async () => {
+      try { resolve(await getDownloadURL(task.snapshot.ref)); }
+      catch (e) { reject(e); }
+    });
+  });
+}
+
+$("postForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!currentUser) return showAuth();
+  const text = $("postText").value.trim();
+  const file = $("postFile").files[0];
+  if (!text && !file) return toast("Write something or choose a photo/video.");
+  if (file && file.size > 20 * 1024 * 1024) return toast("File is larger than 20 MB.");
+  if (file && !/^(image\/|video\/)/.test(file.type)) return toast("Choose an image or video file.");
+  $("publishBtn").disabled = true;
+  $("uploadStatus").textContent = "";
+  try {
+    let mediaURL = "", mediaType = "";
+    if (file) {
+      mediaType = file.type.startsWith("video/") ? "video" : "image";
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+      mediaURL = await uploadFile(file,`posts/${currentUser.uid}/${Date.now()}-${safeName}`);
+    }
+    const profile = await getUserData(currentUser.uid);
+    await addDoc(collection(db,"posts"),{
+      uid:currentUser.uid,
+      authorName:profile.name || currentUser.displayName || "Creator",
+      authorPhoto:profile.photoURL || currentUser.photoURL || "",
+      text,mediaURL,mediaType,
+      likes:[],commentCount:0,
+      createdAt:serverTimestamp()
+    });
+    $("postText").value = "";
+    $("postFile").value = "";
+    $("uploadStatus").textContent = "";
+    toast("Your post is published!");
+    go("home");
+  } catch (e) {
+    toast(friendlyError(e));
+  } finally {
+    $("publishBtn").disabled = false;
+    $("uploadStatus").textContent = "";
+  }
+});
+
+function timeLabel(timestamp) {
+  if (!timestamp?.toDate) return "Just now";
+  const minutes = Math.floor((Date.now() - timestamp.toDate().getTime()) / 60000);
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1440) return `${Math.floor(minutes/60)}h ago`;
+  return `${Math.floor(minutes/1440)}d ago`;
+}
+
+function postHTML(id,p,compact=false) {
+  const liked = (p.likes || []).includes(currentUser?.uid);
+  const media = p.mediaURL
+    ? (p.mediaType === "video"
+      ? `<video class="post-media" src="${escapeHTML(p.mediaURL)}" controls playsinline preload="metadata"></video>`
+      : `<img class="post-media" src="${escapeHTML(p.mediaURL)}" alt="Post by ${escapeHTML(p.authorName)}" loading="lazy">`)
+    : "";
+  return `<article class="panel post" id="post-${escapeHTML(id)}">
+    <div class="post-head">
+      <img class="avatar" src="${escapeHTML(p.authorPhoto || placeholderAvatar)}" alt="">
+      <div style="flex:1;min-width:0">
+        <strong>${escapeHTML(p.authorName || "Creator")}</strong>
+        <div class="muted">${timeLabel(p.createdAt)}</div>
+      </div>
+    </div>
+    ${p.text ? `<div class="post-content">${escapeHTML(p.text)}</div>` : ""}
+    ${media}
+    <div class="post-actions">
+      <button class="action ${liked?"liked":""}" data-like="${escapeHTML(id)}">${liked?"♥":"♡"} ${((p.likes||[]).length)} Like</button>
+      <button class="action" data-comments="${escapeHTML(id)}">💬 ${p.commentCount || 0} Comments</button>
+      <button class="action" data-share="${escapeHTML(id)}">↗ Share</button>
+    </div>
+    <div class="comment-area hidden" id="comments-${escapeHTML(id)}">
+      <div id="comment-list-${escapeHTML(id)}"></div>
+      <form data-comment-form="${escapeHTML(id)}" class="row">
+        <input name="comment" maxlength="500" placeholder="Write a comment…" required>
+        <button class="primary" type="submit">Send</button>
+      </form>
+    </div>
+  </article>`;
+}
+
+function startFeed() {
+  if (unsubscribeFeed) unsubscribeFeed();
+  $("feedStatus").textContent = "Loading community posts…";
+  const q = query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50));
+  unsubscribeFeed = onSnapshot(q, snap => {
+    cachedPosts = snap.docs.map(d => ({id:d.id,...d.data()}));
+    $("feedStatus").textContent = cachedPosts.length ? `${cachedPosts.length} recent posts` : "Be the first to share something!";
+    $("feed").innerHTML = cachedPosts.map(p => postHTML(p.id,p)).join("");
+    renderReels();
+  }, error => {
+    $("feedStatus").textContent = "Could not load posts. Check Firestore rules and index settings.";
+    console.error(error);
+  });
+}
+
+function renderReels() {
+  const videos = cachedPosts.filter(p => p.mediaType === "video");
+  $("reelsFeed").innerHTML = videos.length
+    ? videos.map(p => postHTML(p.id,p)).join("")
+    : `<div class="panel"><h3>No videos yet</h3><p class="muted">Upload the first video to start your video feed.</p><button class="primary" onclick="go('create')">Upload a video</button></div>`;
+}
+
+$("moreBtn").addEventListener("click",refreshFeed);
+
+document.addEventListener("click",async e => {
+  const likeBtn = e.target.closest("[data-like]");
+  const commentBtn = e.target.closest("[data-comments]");
+  const shareBtn = e.target.closest("[data-share]");
+  try {
+    if (likeBtn) {
+      requireUser();
+      const id = likeBtn.dataset.like;
+      const p = cachedPosts.find(x=>x.id===id);
+      if (!p) return;
+      const already = (p.likes||[]).includes(currentUser.uid);
+      await updateDoc(doc(db,"posts",id),{likes:already?arrayRemove(currentUser.uid):arrayUnion(currentUser.uid)});
+    }
+    if (commentBtn) {
+      const id = commentBtn.dataset.comments;
+      const area = $("comments-"+id);
+      area.classList.toggle("hidden");
+      if (!area.classList.contains("hidden")) await loadComments(id);
+    }
+    if (shareBtn) {
+      const id = shareBtn.dataset.share;
+      const url = location.href.split("#")[0] + "#post-" + id;
+      if (navigator.share) await navigator.share({title:"ZYNORA post",url});
+      else if (navigator.clipboard) { await navigator.clipboard.writeText(url); toast("Post link copied."); }
+      else toast(url);
+    }
+  } catch (err) { toast(friendlyError(err)); }
+});
+
+async function loadComments(postId) {
+  const list = $("comment-list-"+postId);
+  list.innerHTML = `<div class="muted">Loading comments…</div>`;
+  try {
+    const q = query(collection(db,"posts",postId,"comments"),orderBy("createdAt","asc"),limit(50));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      list.innerHTML = `<div class="muted">No comments yet. Start the conversation.</div>`;
+      return;
+    }
+    const comments = await Promise.all(snap.docs.map(async d => {
+      const c = d.data();
+      const profile = await getUserData(c.uid);
+      return `<div class="comment"><strong>${escapeHTML(c.authorName || profile.name || "Creator")}</strong> ${escapeHTML(c.text)}</div>`;
+    }));
+    list.innerHTML = comments.join("");
+  } catch(e) {
+    list.innerHTML = `<div class="muted">Comments could not load. Check Firestore rules.</div>`;
+  }
+}
+
+document.addEventListener("submit",async e => {
+  const form = e.target.closest("[data-comment-form]");
+  if (!form) return;
+  e.preventDefault();
+  try {
+    requireUser();
+    const postId = form.dataset.commentForm;
+    const input = form.elements.comment;
+    const text = input.value.trim();
+    if (!text) return;
+    const profile = await getUserData(currentUser.uid);
+    await addDoc(collection(db,"posts",postId,"comments"),{
+      uid:currentUser.uid,
+      authorName:profile.name || currentUser.displayName || "Creator",
+      text,createdAt:serverTimestamp()
+    });
+    await updateDoc(doc(db,"posts",postId),{commentCount:increment(1)});
+    input.value = "";
+    await loadComments(postId);
+  } catch(err) { toast(friendlyError(err)); }
+});
+
+function startStories() {
+  if (unsubscribeStories) unsubscribeStories();
+  const q = query(collection(db,"stories"),orderBy("createdAt","desc"),limit(20));
+  unsubscribeStories = onSnapshot(q,snap => {
+    const stories = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const own = stories.some(s=>s.uid===currentUser?.uid);
+    const create = `<button class="story" style="background:transparent;border:0;color:#ddd" onclick="go('create')"><div class="story-ring"><img src="${escapeHTML(currentUser?.photoURL||placeholderAvatar)}" alt=""></div>＋ Add post</button>`;
+    $("stories").innerHTML = create + (stories.length ? stories.map(s=>`
+      <button class="story" style="background:transparent;border:0" data-story="${escapeHTML(s.id)}">
+        <div class="story-ring"><img src="${escapeHTML(s.authorPhoto||placeholderAvatar)}" alt=""></div>
+        ${escapeHTML(s.authorName||"Creator")}
+      </button>`).join("") : `<div class="muted" style="padding:14px 0">Stories from creators will appear here.</div>`);
+  },err => {
+    $("stories").innerHTML = `<div class="muted">Stories unavailable. You can still publish posts and videos.</div>`;
+    console.warn("Stories:",err);
+  });
+}
+
+document.addEventListener("click",async e => {
+  const storyBtn = e.target.closest("[data-story]");
+  if (!storyBtn) return;
+  try {
+    const snap = await getDoc(doc(db,"stories",storyBtn.dataset.story));
+    if (!snap.exists()) return toast("Story no longer available.");
+    const s = snap.data();
+    if (s.mediaURL) window.open(s.mediaURL,"_blank","noopener,noreferrer");
+    else toast(s.text || "Story");
+  } catch(err) { toast(friendlyError(err)); }
+});
+
+</script>
+</body>
+</html>
