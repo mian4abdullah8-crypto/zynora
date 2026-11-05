@@ -372,7 +372,7 @@ try{
   onAuthStateChanged(auth,updateAuth,error=>notice("authNotice",errorText(error),true));
 
   const ai=getAI(app,{backend:new GoogleAIBackend()});
-  aiModel=getGenerativeModel(ai,{model:"gemini-3.8-flash"});
+  aiModel=getGenerativeModel(ai,{model:"gemini-2.0-flash"});
 
   setStatus("Firebase connected");
   loadJobs();
