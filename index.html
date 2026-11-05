@@ -3,522 +3,537 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101018">
 <title>ZYNORA — Made in Mian Abdullah</title>
 <style>
-:root{--bg:#0b1020;--panel:#151d32;--text:#f5f7ff;--muted:#a8b2ca;--accent:#7c5cff;--line:#29334b}
+:root{--bg:#101018;--panel:#191923;--panel2:#222230;--text:#f7f7fc;--muted:#a6a6ba;--pink:#ff397d;--blue:#795cff;--line:#30303d}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}
 button,input,textarea,select{font:inherit}
-button{cursor:pointer;border:0;border-radius:10px;padding:11px 15px;background:var(--accent);color:white;font-weight:600}
-button:hover{filter:brightness(1.12)}
-input,textarea,select{width:100%;padding:12px;margin:6px 0 12px;background:#0c1325;color:white;border:1px solid var(--line);border-radius:9px}
-textarea{min-height:90px;resize:vertical}
-header{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#10172bee;border-bottom:1px solid var(--line)}
-.logo{font-size:23px;font-weight:900;letter-spacing:2px}.logo span{color:#9c87ff}
-#layout{display:grid;grid-template-columns:205px minmax(0,700px) 240px;gap:18px;max-width:1250px;margin:20px auto;padding:0 15px}
-aside,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px}
-nav{display:flex;flex-direction:column;gap:7px}
-nav button{background:transparent;text-align:left;color:#e5e9f7}
-nav button.active,nav button:hover{background:#302957}
-main{min-width:0}.page{display:none}.page.active{display:block}
-.card{margin-bottom:14px}.muted,small{color:var(--muted)}
-h2{font-size:21px;margin-top:0}h3{margin:8px 0}
-.row{display:flex;gap:9px;align-items:center}
-.row>*{min-width:0}
-.avatar{width:43px;height:43px;border-radius:50%;object-fit:cover;background:#39345c}
-.post-media{max-width:100%;max-height:520px;border-radius:12px;margin-top:10px;display:block}
-.story{display:inline-flex;flex-direction:column;align-items:center;gap:5px;margin:5px}
-.story img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid #967aff}
-.hidden{display:none!important}
-.msg{padding:10px;border-radius:12px;background:#222d46;margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.msg.me{background:#493c85;margin-left:15%}
-#status{padding:9px 16px;color:#b8c5e2;font-size:13px}
-@media(max-width:900px){#layout{grid-template-columns:1fr}aside.right{display:none}aside.left{padding:8px}nav{flex-direction:row;overflow-x:auto}nav button{white-space:nowrap;padding:10px}header{padding:12px} }
+button{cursor:pointer;border:0;border-radius:11px;padding:11px 15px;background:linear-gradient(110deg,var(--pink),var(--blue));color:white;font-weight:700}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,textarea,select{background:#11111a;color:white;border:1px solid var(--line);padding:12px;border-radius:10px;width:100%;outline:none}
+textarea{resize:vertical;min-height:75px}
+a{color:#b8aaff}
+.top{position:sticky;top:0;z-index:5;background:#101018ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:24px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#ff397d,#8b70ff,#44d9ff);color:transparent;background-clip:text}
+.sub{font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:4px}
+.userbox{display:flex;align-items:center;gap:8px}
+.avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--panel2);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.layout{max-width:1200px;margin:auto;display:grid;grid-template-columns:205px minmax(0,1fr);gap:22px;padding:20px}
+.sidebar{position:sticky;top:82px;height:calc(100vh - 100px);overflow:auto;display:flex;flex-direction:column;gap:6px}
+.nav{background:transparent;text-align:left;color:#c9c9d7;font-weight:600}
+.nav:hover,.nav.active{background:var(--panel2);color:white}
+main{min-width:0}
+.page{display:none}.page.active{display:block}
+h2{margin:4px 0 16px;font-size:25px}
+h3{margin:5px 0 12px}
+.muted{color:var(--muted);font-size:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:17px;margin-bottom:16px;min-width:0}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:10px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.secondary{background:var(--panel2);border:1px solid var(--line)}
+.danger{background:#77213c}
+.full{width:100%}
+.stories{display:flex;gap:14px;overflow:auto;padding:8px 2px 17px}
+.story{min-width:72px;text-align:center;font-size:12px;cursor:pointer}
+.storyring{width:62px;height:62px;padding:3px;border-radius:50%;background:linear-gradient(140deg,#ff3981,#8b70ff,#ffd05a);margin:0 auto 7px}
+.storyring img{width:100%;height:100%;border:3px solid var(--bg);border-radius:50%;object-fit:cover}
+.postmedia{width:100%;max-height:620px;object-fit:contain;border-radius:12px;background:#09090d;margin-top:12px}
+.postvideo{width:100%;max-height:620px;border-radius:12px;background:black;margin-top:12px}
+.posttext{white-space:pre-wrap;overflow-wrap:anywhere}
+.profilehead{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.profilepic{width:95px;height:95px;border-radius:50%;object-fit:cover;background:var(--panel2)}
+#toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:#29293a;padding:12px 18px;border-radius:12px;z-index:20;display:none;max-width:90%;box-shadow:0 5px 30px #0008}
+.auth{max-width:440px;margin:35px auto;padding:24px}
+#authArea{padding:15px}
+.bottom{display:none}
+.mediaGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.mediaGrid img,.mediaGrid video{width:100%;height:150px;object-fit:cover;border-radius:9px;background:#222}
+hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+small{color:var(--muted)}
+@media(max-width:760px){
+ .layout{display:block;padding:12px}.sidebar{display:none}.top{padding:10px 12px}.brand{font-size:21px}
+ .bottom{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#15151fee;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 3px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}
+ .bottom button{background:transparent;padding:8px 5px;font-size:11px;color:#ddd;display:flex;flex-direction:column;align-items:center;gap:3px}
+ .bottom button span:first-child{font-size:20px}
+ body{padding-bottom:70px}.grid2{grid-template-columns:1fr}.auth{margin:12px auto;padding:16px}
+ .mediaGrid img,.mediaGrid video{height:110px}
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">ZYNO<span>RA</span></div>
-  <div id="userLabel" class="muted">Welcome</div>
-  <button id="logout" class="hidden">Logout</button>
+<header class="top">
+  <div><div class="brand">ZYNORA</div><div class="sub">MADE IN MIAN ABDULLAH</div></div>
+  <div class="userbox"><span id="topName" class="muted">Guest</span><img id="topAvatar" class="avatar" alt="Profile" hidden><button id="topLogin" onclick="showPage('account')">Sign in</button></div>
 </header>
-<div id="status">Starting ZYNORA…</div>
 
-<section id="auth" style="max-width:430px;margin:35px auto;padding:20px">
-  <div class="card">
-    <h2>Welcome to ZYNORA</h2>
-    <p class="muted">Your world. Your ideas. Your community.</p>
-    <label>Name (signup only)</label>
-    <input id="authName" placeholder="Your name">
-    <label>Email</label>
-    <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com">
-    <label>Password</label>
-    <input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters">
-    <div class="row">
-      <button id="signup">Create account</button>
-      <button id="login">Login</button>
-    </div>
-    <p id="authError" style="color:#ff8eaa"></p>
+<section id="authArea">
+  <div class="card auth">
+    <h2>Welcome to ZYNORA ✨</h2>
+    <p class="muted">Create your account and connect with the world.</p>
+    <form id="authForm" class="stack">
+      <input id="authName" placeholder="Your display name (for signup)">
+      <input id="authEmail" type="email" placeholder="Email address" required>
+      <input id="authPassword" type="password" placeholder="Password (6+ characters)" minlength="6" required>
+      <button id="authSubmit">Create account</button>
+      <button id="authToggle" type="button" class="secondary">Already registered? Sign in</button>
+      <button id="googleBtn" type="button" class="secondary">Continue with Google</button>
+    </form>
+    <p class="muted">Sign in to publish content, upload media, chat and use AI.</p>
   </div>
-  <p class="muted" style="text-align:center">MADE IN MIAN ABDULLAH</p>
 </section>
 
-<div id="layout" class="hidden">
-  <aside class="left">
-    <nav>
-      <button class="active" data-page="home">⌂ Home</button>
-      <button data-page="discover">⌕ Discover</button>
-      <button data-page="stories">◉ Stories</button>
-      <button data-page="create">＋ Create Post</button>
-      <button data-page="ai">✦ AI Assistant</button>
-      <button data-page="messages">✉ Messages</button>
-      <button data-page="jobs">▣ Jobs</button>
-      <button data-page="profile">◎ Profile</button>
-      <button data-page="settings">⚙ Settings</button>
-    </nav>
-  </aside>
-
+<div class="layout" id="appLayout" hidden>
+  <aside class="sidebar" id="sideNav"></aside>
   <main>
-    <section id="home" class="page active">
+    <section class="page active" id="page-home">
+      <h2>Home feed</h2>
       <div class="card">
-        <h2>Your feed</h2>
-        <p class="muted">Share ideas and discover your community.</p>
-        <button data-open="create">＋ Create a post</button>
+        <div class="row" style="justify-content:space-between"><h3>Stories</h3><button onclick="showPage('create')">＋ Add story</button></div>
+        <div id="stories" class="stories"><span class="muted">Stories will appear here.</span></div>
       </div>
       <div id="feed"></div>
     </section>
 
-    <section id="discover" class="page">
-      <div class="card"><h2>Discover</h2><input id="searchPosts" placeholder="Search posts and creators…"><div id="searchResults"></div></div>
-    </section>
-
-    <section id="stories" class="page">
-      <div class="card">
-        <h2>Stories</h2>
-        <p class="muted">Add a photo or short video story.</p>
-        <input type="file" id="storyFile" accept="image/*,video/*">
-        <button id="addStory">Publish story</button>
-      </div>
-      <div id="storyList" class="card"></div>
-    </section>
-
-    <section id="create" class="page">
-      <div class="card">
-        <h2>Create post</h2>
-        <textarea id="postText" placeholder="What would you like to share?"></textarea>
-        <input type="file" id="postFile" accept="image/*,video/*">
-        <p class="muted">Choose a photo/video, or publish text only.</p>
-        <button id="publishPost">Publish post</button>
+    <section class="page" id="page-discover">
+      <h2>Discover 🌍</h2>
+      <div class="card stack">
+        <input id="searchInput" placeholder="Search posts, captions, creators..." oninput="renderDiscover()">
+        <div id="discoverFeed"></div>
       </div>
     </section>
 
-    <section id="ai" class="page">
-      <div class="card">
-        <h2>✦ ZYNORA AI</h2>
-        <p class="muted">Powered by Gemini 3.5 Flash-Lite</p>
-        <div id="chatLog" style="min-height:180px"></div>
-        <textarea id="aiPrompt" placeholder="Ask me anything…"></textarea>
-        <button id="sendAI">Send message</button>
-        <button id="clearAI" style="background:#303b55">Clear chat</button>
+    <section class="page" id="page-reels">
+      <h2>Reels & Shorts</h2>
+      <p class="muted">Vertical videos from creators. Scroll down to explore.</p>
+      <div id="reelsFeed"></div>
+    </section>
+
+    <section class="page" id="page-create">
+      <h2>Create content</h2>
+      <div class="card stack">
+        <h3>New post, photo, video or story</h3>
+        <textarea id="captionInput" placeholder="What's happening in your world?"></textarea>
+        <label>Choose a photo or video (max 100 MB in this app)</label>
+        <input id="mediaInput" type="file" accept="image/*,video/*">
+        <label class="row"><input id="asStory" type="checkbox" style="width:auto"> Publish as a story (expires after 24 hours)</label>
+        <button id="publishBtn" onclick="publishPost()">Upload and publish</button>
+        <small>Uploads require Firebase Storage to be enabled and secured with rules.</small>
+      </div>
+      <div class="card stack">
+        <h3>Camera studio & filters</h3>
+        <p class="muted">Local camera preview with basic visual effects. This does not broadcast a public live stream.</p>
+        <div class="row"><button onclick="startCamera()">Start camera</button><button class="secondary" onclick="stopCamera()">Stop camera</button></div>
+        <select id="filterSelect" onchange="applyFilter()">
+          <option value="none">Original</option><option value="grayscale(1)">Black & white</option>
+          <option value="sepia(.8)">Vintage</option><option value="saturate(1.8)">Vibrant</option>
+          <option value="contrast(1.4)">High contrast</option>
+        </select>
+        <video id="cameraPreview" autoplay playsinline muted style="width:100%;max-height:420px;border-radius:12px;background:#08080b;filter:none"></video>
+        <button class="secondary" onclick="capturePhoto()">Capture photo</button>
       </div>
     </section>
 
-    <section id="messages" class="page">
+    <section class="page" id="page-ai">
+      <h2>ZYNORA AI ✨</h2>
       <div class="card">
-        <h2>Messages</h2>
-        <p class="muted">Enter the exact email of the registered user you want to message.</p>
-        <input id="recipientEmail" type="email" placeholder="Recipient email">
-        <button id="openConversation">Open conversation</button>
-        <div id="conversation" class="hidden">
-          <div id="messageList"></div>
-          <textarea id="messageText" placeholder="Write a message…"></textarea>
-          <button id="sendMessage">Send</button>
+        <p class="muted">AI assistant powered by Firebase AI Logic and Gemini 3.5 Flash-Lite.</p>
+        <div id="aiHistory" class="stack" style="margin-bottom:14px"></div>
+        <form id="aiForm" class="stack">
+          <textarea id="aiPrompt" placeholder="Ask anything..." required></textarea>
+          <button id="aiSend">Send to AI</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="page" id="page-messages">
+      <h2>Private messages</h2>
+      <div class="card stack">
+        <p class="muted">Enter the recipient's exact registered email address. This basic chat uses Firestore; secure rules are essential.</p>
+        <input id="chatEmail" type="email" placeholder="Recipient email address">
+        <button onclick="openChat()">Open conversation</button>
+        <hr>
+        <div id="chatTitle" class="muted">Choose a conversation.</div>
+        <div id="chatHistory" class="stack"></div>
+        <form id="chatForm" class="row">
+          <input id="chatMessage" placeholder="Write a message..." required>
+          <button>Send</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="page" id="page-market">
+      <h2>Marketplace 🛍️</h2>
+      <div class="card stack">
+        <h3>List a product</h3>
+        <input id="productName" placeholder="Product name">
+        <input id="productPrice" type="number" min="0" placeholder="Price">
+        <textarea id="productDesc" placeholder="Description"></textarea>
+        <button onclick="addProduct()">Publish listing</button>
+      </div>
+      <div id="products"></div>
+      <p class="muted">No payments are collected by this starter app.</p>
+    </section>
+
+    <section class="page" id="page-live">
+      <h2>Live & Calls</h2>
+      <div class="card stack">
+        <p>This studio can show your own camera and microphone preview. It is not yet a public broadcast or a real person-to-person call.</p>
+        <button onclick="startCamera(true)">Enable camera & microphone</button>
+        <button class="secondary" onclick="stopCamera()">Stop camera & microphone</button>
+        <video id="callPreview" autoplay playsinline muted style="width:100%;max-height:420px;border-radius:12px;background:#08080b"></video>
+        <small>Real calls and public streaming require signaling, WebRTC infrastructure and/or a streaming provider.</small>
+      </div>
+    </section>
+
+    <section class="page" id="page-profile">
+      <h2>Your profile</h2>
+      <div class="card">
+        <div class="profilehead">
+          <img id="profileAvatar" class="profilepic" alt="Profile photo">
+          <div><h3 id="profileName">Your name</h3><div id="profileEmail" class="muted"></div><div id="profileCount" class="muted">0 posts</div></div>
         </div>
+        <hr>
+        <form id="profileForm" class="stack">
+          <input id="profileNameInput" placeholder="Display name">
+          <label>Profile photo</label><input id="avatarInput" type="file" accept="image/*">
+          <button>Save profile</button>
+        </form>
+        <hr><div id="profilePosts" class="mediaGrid"></div>
       </div>
     </section>
 
-    <section id="jobs" class="page">
-      <div class="card">
-        <h2>Jobs marketplace</h2>
-        <input id="jobTitle" placeholder="Job title">
-        <textarea id="jobDescription" placeholder="Describe the job"></textarea>
-        <input id="jobCountry" placeholder="Country">
-        <button id="publishJob">Publish job</button>
-      </div>
-      <div id="jobList"></div>
-    </section>
-
-    <section id="profile" class="page">
-      <div class="card">
-        <h2>Your profile</h2>
-        <img id="profilePhoto" class="avatar" style="width:85px;height:85px" alt="Profile photo">
-        <label>Change profile photo</label>
-        <input type="file" id="profileFile" accept="image/*">
-        <label>Display name</label>
-        <input id="profileName" placeholder="Your name">
-        <label>Bio</label>
-        <textarea id="profileBio" placeholder="Tell the world about yourself"></textarea>
-        <button id="saveProfile">Save profile</button>
-        <h3>Your posts</h3>
-        <div id="myPosts"></div>
-      </div>
-    </section>
-
-    <section id="settings" class="page">
-      <div class="card">
-        <h2>Settings</h2>
-        <p>Account: <span id="settingsEmail"></span></p>
-        <p class="muted">ZYNORA — MADE IN MIAN ABDULLAH</p>
-        <button id="settingsLogout">Logout</button>
+    <section class="page" id="page-account">
+      <h2>Account & settings</h2>
+      <div class="card stack">
+        <h3>Account status</h3><p id="accountStatus" class="muted">Loading...</p>
+        <button class="secondary" onclick="testFirebase()">Test Firebase connection</button>
+        <button class="secondary" onclick="enableNotifications()">Enable browser notifications</button>
+        <button class="secondary" onclick="showRulesHelp()">Setup help</button>
+        <button class="danger" onclick="logout()">Sign out</button>
+        <div id="settingsInfo" class="muted"></div>
       </div>
     </section>
   </main>
-
-  <aside class="right">
-    <div class="card"><h3>ZYNORA</h3><p class="muted">Create. Connect. Discover.</p></div>
-    <div class="card"><h3>Community safety</h3><p class="muted">Do not share passwords or private information in public posts.</p></div>
-  </aside>
 </div>
 
+<nav class="bottom" id="bottomNav" hidden></nav>
+<div id="toast" role="status"></div>
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import {
-  getAuth,onAuthStateChanged,createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,signOut,updateProfile
+ getAuth,onAuthStateChanged,createUserWithEmailAndPassword,
+ signInWithEmailAndPassword,signOut,GoogleAuthProvider,signInWithPopup,
+ updateProfile
 } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 import {
-  getFirestore,collection,addDoc,getDocs,doc,setDoc,getDoc,
-  query,orderBy,limit,where,serverTimestamp,onSnapshot
+ getFirestore,collection,addDoc,doc,setDoc,getDoc,onSnapshot,
+ query,orderBy,limit,where,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
-import {
-  getStorage,ref,uploadBytes,getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-storage.js";
-import { getAI,GoogleAIBackend,getGenerativeModel }
-  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-ai.js";
+import {getStorage,ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-storage.js";
+import {getAI,GoogleAIBackend,getGenerativeModel} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-ai.js";
 
+/* Your Firebase project configuration */
 const firebaseConfig = {
-  apiKey: "AIzaSyDWXEZIo11dbkhw69tIwH7BGhPIPRbuebU",
-  authDomain: "zynora-a7d7a.firebaseapp.com",
-  projectId: "zynora-a7d7a",
-  storageBucket: "zynora-a7d7a.firebasestorage.app",
-  messagingSenderId: "563576766126",
-  appId: "1:563576766126:web:77a83450e5da326f37b73f",
-  measurementId: "G-6CMRSS4J62"
+ apiKey: "AIzaSyDWXEZIo11dbkhw69tIwH7BGhPIPRbuebU",
+ authDomain: "zynora-a7d7a.firebaseapp.com",
+ projectId: "zynora-a7d7a",
+ storageBucket: "zynora-a7d7a.firebasestorage.app",
+ messagingSenderId: "563576766126",
+ appId: "1:563576766126:web:77a83450e5da326f37b73f",
+ measurementId: "G-6CMRSS4J62"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const storage=getStorage(app);
 let aiModel;
-try {
-  const ai = getAI(app, {backend: new GoogleAIBackend()});
-  aiModel = getGenerativeModel(ai, {model: "gemini-3.5-flash-lite"});
-} catch (e) {
-  console.error("AI setup error:", e);
+try{
+ aiModel=getGenerativeModel(getAI(app,{backend:new GoogleAIBackend()}),{model:"gemini-3.5-flash-lite"});
+}catch(e){console.error("AI initialization:",e);}
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const avatarFallback="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100%" height="100%" fill="#29293a"/><circle cx="50" cy="38" r="19" fill="#aaa"/><path d="M15 100Q18 62 50 62Q82 62 85 100" fill="#aaa"/></svg>');
+let user=null, signupMode=true, posts=[], products=[], activeChat="", stops=[], cameraStream=null;
+let chatStop=null, storyStop=null, feedStop=null, productStop=null;
+const navItems=[
+ ["home","⌂","Home"],["discover","⌕","Discover"],["reels","▶","Reels"],
+ ["create","＋","Create"],["ai","✦","AI Assistant"],["messages","✉","Messages"],
+ ["market","▣","Marketplace"],["live","◉","Live & Calls"],
+ ["profile","◎","Profile"],["account","⚙","Settings"]
+];
+
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";clearTimeout(toast.timer);toast.timer=setTimeout(()=>$("toast").style.display="none",4000);}
+function errMsg(e){console.error(e);toast((e?.code?e.code+": ":"")+(e?.message||"Something went wrong"));}
+
+function buildNav(){
+ const make=(mobile=false)=>navItems.map(([id,icon,label])=>
+ `<button class="nav ${id==="home"?"active":""}" data-page="${id}" ${mobile?'title="'+label+'"':''}><span>${icon}</span>${mobile?`<span>${label}</span>`:label}</button>`).join("");
+ $("sideNav").innerHTML=make();$("bottomNav").innerHTML=make(true);
+ document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 }
+buildNav();
 
-const $ = id => document.getElementById(id);
-const status = message => $("status").textContent = message;
-const safe = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[ch]));
-let currentUser = null;
-let stopFeed = null;
-let stopMessages = null;
-let activeChatId = null;
-let allPosts = [];
-
-function showPage(page) {
-  document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === page));
-  document.querySelectorAll("[data-page]").forEach(b => b.classList.toggle("active", b.dataset.page === page));
-  if (page === "jobs") loadJobs();
-  if (page === "stories") loadStories();
-  if (page === "profile") loadProfile();
-}
-document.querySelectorAll("[data-page]").forEach(b => b.addEventListener("click", () => showPage(b.dataset.page)));
-document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click", () => showPage(b.dataset.open)));
-
-function errorText(e) {
-  console.error(e);
-  return e?.message || "Something went wrong. Please try again.";
-}
-
-$("signup").addEventListener("click", async () => {
-  $("authError").textContent = "";
-  const name = $("authName").value.trim();
-  const email = $("authEmail").value.trim();
-  const password = $("authPassword").value;
-  if (!name || !email || password.length < 6) {
-    $("authError").textContent = "Enter your name, valid email and password (at least 6 characters).";
-    return;
-  }
-  try {
-    const result = await createUserWithEmailAndPassword(auth,email,password);
-    await updateProfile(result.user,{displayName:name});
-    await setDoc(doc(db,"users",result.user.uid),{
-      name,email,bio:"",photoURL:"",createdAt:serverTimestamp()
-    });
-  } catch(e) { $("authError").textContent = errorText(e); }
+window.showPage=id=>{
+ if(!user && id!=="account"){toast("Please sign in first.");$("authArea").hidden=false;return;}
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+id));
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ window.scrollTo({top:0,behavior:"smooth"});
+ if(id==="discover")renderDiscover();
+ if(id==="reels")renderReels();
+ if(id==="profile")renderProfile();
+ if(id==="market")loadProducts();
+};
+$("authToggle").onclick=()=>{
+ signupMode=!signupMode;
+ $("authName").hidden=!signupMode;
+ $("authName").required=signupMode;
+ $("authSubmit").textContent=signupMode?"Create account":"Sign in";
+ $("authToggle").textContent=signupMode?"Already registered? Sign in":"New here? Create account";
+};
+$("authForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const email=$("authEmail").value.trim(),password=$("authPassword").value;
+ try{
+  if(signupMode){
+   const cred=await createUserWithEmailAndPassword(auth,email,password);
+   const name=$("authName").value.trim()||email.split("@")[0];
+   await updateProfile(cred.user,{displayName:name});
+   await setDoc(doc(db,"users",cred.user.uid),{uid:cred.user.uid,email,displayName:name,photoURL:"",createdAt:serverTimestamp()});
+  }else await signInWithEmailAndPassword(auth,email,password);
+  toast("Account action successful.");
+ }catch(e){errMsg(e);}
 });
-$("login").addEventListener("click", async () => {
-  $("authError").textContent = "";
-  try {
-    await signInWithEmailAndPassword(auth,$("authEmail").value.trim(),$("authPassword").value);
-  } catch(e) { $("authError").textContent = errorText(e); }
-});
-async function logout() {
-  try { await signOut(auth); } catch(e) { alert(errorText(e)); }
-}
-$("logout").addEventListener("click",logout);
-$("settingsLogout").addEventListener("click",logout);
+$("googleBtn").onclick=async()=>{
+ try{
+  const result=await signInWithPopup(auth,new GoogleAuthProvider());
+  await setDoc(doc(db,"users",result.user.uid),{
+   uid:result.user.uid,email:result.user.email||"",
+   displayName:result.user.displayName||"Creator",
+   photoURL:result.user.photoURL||""
+  },{merge:true});
+ }catch(e){errMsg(e);}
+};
 
-onAuthStateChanged(auth, async user => {
-  currentUser = user;
-  $("auth").classList.toggle("hidden",!!user);
-  $("layout").classList.toggle("hidden",!user);
-  $("logout").classList.toggle("hidden",!user);
-  $("userLabel").textContent = user ? (user.displayName || user.email) : "Welcome";
-  if (!user) {
-    if (stopFeed) stopFeed();
-    if (stopMessages) stopMessages();
-    status("Please log in.");
-    return;
-  }
-  $("settingsEmail").textContent = user.email || "";
-  status("Signed in as " + (user.displayName || user.email));
-  loadFeed();
-  loadProfile();
-});
-
-async function uploadFile(file, folder) {
-  if (!file) return "";
-  const maxBytes = 100 * 1024 * 1024;
-  if (file.size > maxBytes) throw new Error("File must be under 100 MB.");
-  const path = `${folder}/${currentUser.uid}/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`;
-  const target = ref(storage,path);
-  await uploadBytes(target,file);
-  return await getDownloadURL(target);
-}
-
-$("publishPost").addEventListener("click", async () => {
-  if (!currentUser) return;
-  const text = $("postText").value.trim();
-  const file = $("postFile").files[0];
-  if (!text && !file) return alert("Write something or choose a photo/video.");
-  try {
-    $("publishPost").disabled = true;
-    const mediaURL = await uploadFile(file,"posts");
-    await addDoc(collection(db,"posts"),{
-      uid:currentUser.uid,
-      author:currentUser.displayName || currentUser.email,
-      text,mediaURL,mediaType:file?.type || "",
-      likes:[],createdAt:serverTimestamp()
-    });
-    $("postText").value = "";
-    $("postFile").value = "";
-    showPage("home");
-    status("Post published.");
-  } catch(e) { alert(errorText(e)); }
-  finally { $("publishPost").disabled = false; }
+onAuthStateChanged(auth,async u=>{
+ user=u;
+ $("authArea").hidden=!!u;$("appLayout").hidden=!u;$("bottomNav").hidden=!u;
+ $("topLogin").hidden=!!u;$("topName").textContent=u?(u.displayName||u.email):"Guest";
+ $("topAvatar").hidden=!u;$("topAvatar").src=u?.photoURL||avatarFallback;
+ $("accountStatus").textContent=u?`Signed in as ${u.email}`:"Not signed in";
+ if(!u){posts=[];if(feedStop)feedStop();if(storyStop)storyStop();if(productStop)productStop();if(chatStop)chatStop();return;}
+ try{
+  const userRef=doc(db,"users",u.uid),snap=await getDoc(userRef);
+  if(!snap.exists())await setDoc(userRef,{uid:u.uid,email:u.email||"",displayName:u.displayName||"Creator",photoURL:u.photoURL||"",createdAt:serverTimestamp()},{merge:true});
+  listenFeed();listenStories();loadProducts();renderProfile();
+ }catch(e){errMsg(e);}
 });
 
-function renderPost(post,id) {
-  const media = post.mediaURL
-    ? (post.mediaType?.startsWith("video/")
-      ? `<video class="post-media" src="${safe(post.mediaURL)}" controls playsinline></video>`
-      : `<img class="post-media" src="${safe(post.mediaURL)}" alt="Post media">`)
-    : "";
-  const liked = (post.likes || []).includes(currentUser.uid);
-  return `<article class="card">
-    <div class="row"><div style="flex:1"><b>${safe(post.author || "ZYNORA user")}</b><br><small>Community post</small></div></div>
-    <p>${safe(post.text)}</p>${media}
-    <div class="row" style="margin-top:12px">
-      <button data-like="${id}" style="background:${liked ? "#5744a3" : "#303b55"}">${liked ? "♥ Liked" : "♡ Like"} (${(post.likes||[]).length})</button>
-      <button data-comment="${id}" style="background:#303b55">Comment</button>
-    </div>
-    <div id="comments-${id}"></div>
-  </article>`;
-}
-function bindPostActions(root) {
-  root.querySelectorAll("[data-like]").forEach(b => b.addEventListener("click", async () => {
-    const id=b.dataset.like;
-    const post=allPosts.find(p=>p.id===id);
-    if(!post) return;
-    const likes=new Set(post.likes||[]);
-    likes.has(currentUser.uid)?likes.delete(currentUser.uid):likes.add(currentUser.uid);
-    try {
-      await setDoc(doc(db,"posts",id),{likes:[...likes]},{merge:true});
-    } catch(e) { alert(errorText(e)); }
-  }));
-  root.querySelectorAll("[data-comment]").forEach(b => b.addEventListener("click", async () => {
-    const id=b.dataset.comment;
-    const text=prompt("Write your comment:");
-    if(!text?.trim()) return;
-    try {
-      await addDoc(collection(db,"posts",id,"comments"),{
-        uid:currentUser.uid,author:currentUser.displayName||currentUser.email,
-        text:text.trim(),createdAt:serverTimestamp()
-      });
-      const area=$("comments-"+id);
-      area.innerHTML += `<div class="msg"><b>${safe(currentUser.displayName||currentUser.email)}</b><br>${safe(text.trim())}</div>`;
-    } catch(e) { alert(errorText(e)); }
-  }));
-}
-function loadFeed() {
-  if(stopFeed) stopFeed();
-  stopFeed=onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),snap=>{
-    allPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
-    $("feed").innerHTML=allPosts.map(p=>renderPost(p,p.id)).join("") || '<div class="card">No posts yet. Be the first to share!</div>';
-    bindPostActions($("feed"));
-    const term=$("searchPosts").value.toLowerCase();
-    renderSearch(term);
-    $("myPosts").innerHTML=allPosts.filter(p=>p.uid===currentUser.uid).map(p=>renderPost(p,p.id)).join("") || "You have not posted yet.";
-    bindPostActions($("myPosts"));
-  },e=>status("Feed error: "+errorText(e)));
-}
-$("searchPosts").addEventListener("input",e=>renderSearch(e.target.value.toLowerCase()));
-function renderSearch(term) {
-  const found=allPosts.filter(p=>(p.text||"").toLowerCase().includes(term)||(p.author||"").toLowerCase().includes(term));
-  $("searchResults").innerHTML=found.map(p=>renderPost(p,p.id)).join("") || "No matching posts.";
-  bindPostActions($("searchResults"));
+async function uploadFile(file,path){
+ if(!file) return "";
+ if(file.size>100*1024*1024)throw new Error("File is over 100 MB.");
+ if(!/^(image|video)\//.test(file.type)&&!file.type.startsWith("image/"))throw new Error("Choose a valid image or video.");
+ const objectRef=ref(storage,path);
+ await uploadBytes(objectRef,file,{contentType:file.type});
+ return await getDownloadURL(objectRef);
 }
 
-$("addStory").addEventListener("click",async()=>{
-  const file=$("storyFile").files[0];
-  if(!file) return alert("Choose a photo or video first.");
-  try {
-    const mediaURL=await uploadFile(file,"stories");
-    await addDoc(collection(db,"stories"),{
-      uid:currentUser.uid,author:currentUser.displayName||currentUser.email,
-      mediaURL,mediaType:file.type,createdAt:serverTimestamp()
-    });
-    $("storyFile").value="";
-    loadStories();
-    alert("Story published.");
-  } catch(e){alert(errorText(e));}
-});
-async function loadStories() {
-  try {
-    const snap=await getDocs(query(collection(db,"stories"),orderBy("createdAt","desc"),limit(40)));
-    $("storyList").innerHTML=snap.docs.map(d=>{
-      const s=d.data();
-      const visual=s.mediaType?.startsWith("video/")
-        ? `<video src="${safe(s.mediaURL)}" controls style="width:100%;max-height:300px"></video>`
-        : `<img src="${safe(s.mediaURL)}" style="width:100%;max-height:300px;object-fit:contain">`;
-      return `<div class="story"><img src="${safe(s.mediaURL)}" alt="Story"><b>${safe(s.author)}</b>${visual}</div>`;
-    }).join("") || "No stories yet.";
-  } catch(e){$("storyList").textContent=errorText(e);}
+window.publishPost=async()=>{
+ if(!user)return toast("Sign in first.");
+ const file=$("mediaInput").files[0],caption=$("captionInput").value.trim(),isStory=$("asStory").checked;
+ if(!file&&!caption)return toast("Add a caption or choose media.");
+ $("publishBtn").disabled=true;
+ try{
+  let mediaURL="",type="text";
+  if(file){mediaURL=await uploadFile(file,`uploads/${user.uid}/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);type=file.type.startsWith("video/")?"video":"image";}
+  const data={uid:user.uid,email:user.email||"",author:user.displayName||user.email||"Creator",photoURL:user.photoURL||"",caption,mediaURL,type,createdAt:serverTimestamp()};
+  if(isStory){
+   await addDoc(collection(db,"stories"),{...data,expiresAt:Date.now()+24*60*60*1000});
+  }else await addDoc(collection(db,"posts"),data);
+  $("captionInput").value="";$("mediaInput").value="";$("asStory").checked=false;
+  toast(isStory?"Story published!":"Post published!");
+ }catch(e){errMsg(e);}finally{$("publishBtn").disabled=false;}
+};
+
+function listenFeed(){
+ if(feedStop)feedStop();
+ feedStop=onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(60)),snap=>{
+  posts=snap.docs.map(d=>({id:d.id,...d.data()}));
+  renderFeed();renderDiscover();renderReels();renderProfile();
+ },errMsg);
+}
+function postCard(p){
+ const media=p.mediaURL?(p.type==="video"
+  ?`<video class="postvideo" src="${esc(p.mediaURL)}" controls playsinline preload="metadata"></video>`
+  :`<img class="postmedia" src="${esc(p.mediaURL)}" alt="Post media" loading="lazy">`):"";
+ return `<article class="card">
+  <div class="row"><img class="avatar" src="${esc(p.photoURL||avatarFallback)}" alt=""><div><b>${esc(p.author||"Creator")}</b><div class="muted">${p.type==="video"?"Video":p.type==="image"?"Photo":"Post"}</div></div></div>
+  ${p.caption?`<p class="posttext">${esc(p.caption)}</p>`:""}${media}
+  <div class="actions"><button class="secondary" data-like="${esc(p.id)}">♡ Like</button><button class="secondary" data-comment="${esc(p.id)}">Comment</button>${user&&p.uid===user.uid?`<button class="danger" data-delete="${esc(p.id)}">Delete</button>`:""}</div>
+  <div id="comments-${esc(p.id)}"></div>
+ </article>`;
+}
+function attachPostButtons(root){
+ root.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>likePost(b.dataset.like));
+ root.querySelectorAll("[data-comment]").forEach(b=>b.onclick=()=>commentPost(b.dataset.comment));
+ root.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deletePost(b.dataset.delete));
+}
+function renderFeed(){ $("feed").innerHTML=posts.length?posts.map(postCard).join(""):'<div class="card">No posts yet. Be the first to share something!</div>';attachPostButtons($("feed"));}
+window.renderDiscover=()=>{
+ const q=($("searchInput")?.value||"").toLowerCase();
+ const found=posts.filter(p=>(p.caption||"").toLowerCase().includes(q)||(p.author||"").toLowerCase().includes(q));
+ $("discoverFeed").innerHTML=found.map(postCard).join("")||"No matching posts.";
+ attachPostButtons($("discoverFeed"));
+};
+window.renderReels=()=>{
+ const found=posts.filter(p=>p.type==="video");
+ $("reelsFeed").innerHTML=found.map(p=>`<div class="card" style="max-width:600px;margin:0 auto 24px">${postCard(p)}</div>`).join("")||'<div class="card">No videos yet. Upload a video from Create.</div>';
+ attachPostButtons($("reelsFeed"));
+};
+async function likePost(id){
+ if(!user)return toast("Sign in first.");
+ try{await addDoc(collection(db,"posts",id,"likes"),{uid:user.uid,createdAt:serverTimestamp()});toast("Like saved.");}catch(e){errMsg(e);}
+}
+async function commentPost(id){
+ if(!user)return toast("Sign in first.");
+ const text=prompt("Write your comment:");
+ if(!text?.trim())return;
+ try{await addDoc(collection(db,"posts",id,"comments"),{uid:user.uid,author:user.displayName||user.email,text:text.trim(),createdAt:serverTimestamp()});toast("Comment added.");}catch(e){errMsg(e);}
+}
+async function deletePost(id){
+ const p=posts.find(x=>x.id===id);
+ if(!p||p.uid!==user?.uid)return toast("You can only delete your own post.");
+ if(!confirm("Delete this post?"))return;
+ try{await (await import("https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js")).deleteDoc(doc(db,"posts",id));toast("Post deleted.");}catch(e){errMsg(e);}
 }
 
-$("sendAI").addEventListener("click",async()=>{
-  const promptText=$("aiPrompt").value.trim();
-  if(!promptText) return;
-  if(!aiModel) return alert("AI initialize nahi hua. Firebase AI Logic settings aur browser Console check karein.");
-  $("aiPrompt").value="";
-  $("chatLog").innerHTML+=`<div class="msg me"><b>You</b><br>${safe(promptText)}</div>`;
-  const waiting=document.createElement("div");
-  waiting.className="msg";waiting.textContent="ZYNORA AI is thinking…";
-  $("chatLog").append(waiting);
-  $("sendAI").disabled=true;
-  try {
-    const result=await aiModel.generateContent(promptText);
-    waiting.textContent=result.response.text() || "No text response received.";
-  } catch(e) {
-    waiting.textContent="AI error: "+errorText(e);
-  } finally {$("sendAI").disabled=false;}
-});
-$("clearAI").addEventListener("click",()=>$("chatLog").replaceChildren());
-
-$("openConversation").addEventListener("click",async()=>{
-  const email=$("recipientEmail").value.trim().toLowerCase();
-  if(!email) return alert("Enter recipient email.");
-  if(email===currentUser.email?.toLowerCase()) return alert("Choose another user.");
-  try {
-    const users=await getDocs(query(collection(db,"users"),where("email","==",email),limit(1)));
-    if(users.empty) return alert("No registered user found with that email.");
-    const recipient=users.docs[0].id;
-    activeChatId=[currentUser.uid,recipient].sort().join("_");
-    await setDoc(doc(db,"chats",activeChatId),{
-      members:[currentUser.uid,recipient],updatedAt:serverTimestamp()
-    },{merge:true});
-    $("conversation").classList.remove("hidden");
-    if(stopMessages) stopMessages();
-    stopMessages=onSnapshot(query(collection(db,"chats",activeChatId,"messages"),orderBy("createdAt","asc"),limit(100)),snap=>{
-      $("messageList").innerHTML=snap.docs.map(d=>{
-        const m=d.data();
-        return `<div class="msg ${m.uid===currentUser.uid?"me":""}"><b>${safe(m.author)}</b><br>${safe(m.text)}</div>`;
-      }).join("");
-    },e=>alert(errorText(e)));
-  } catch(e){alert(errorText(e));}
-});
-$("sendMessage").addEventListener("click",async()=>{
-  const text=$("messageText").value.trim();
-  if(!text||!activeChatId)return;
-  try {
-    await addDoc(collection(db,"chats",activeChatId,"messages"),{
-      uid:currentUser.uid,author:currentUser.displayName||currentUser.email,
-      text,createdAt:serverTimestamp()
-    });
-    await setDoc(doc(db,"chats",activeChatId),{updatedAt:serverTimestamp()},{merge:true});
-    $("messageText").value="";
-  } catch(e){alert(errorText(e));}
-});
-
-$("publishJob").addEventListener("click",async()=>{
-  const title=$("jobTitle").value.trim(),description=$("jobDescription").value.trim();
-  const country=$("jobCountry").value.trim();
-  if(!title||!description) return alert("Enter job title and description.");
-  try {
-    await addDoc(collection(db,"jobs"),{
-      uid:currentUser.uid,title,description,country,
-      author:currentUser.displayName||currentUser.email,
-      createdAt:serverTimestamp()
-    });
-    $("jobTitle").value="";$("jobDescription").value="";$("jobCountry").value="";
-    loadJobs();alert("Job published.");
-  } catch(e){alert(errorText(e));}
-});
-async function loadJobs(){
-  try{
-    const snap=await getDocs(query(collection(db,"jobs"),orderBy("createdAt","desc"),limit(50)));
-    $("jobList").innerHTML=snap.docs.map(d=>{
-      const j=d.data();
-      return `<div class="card"><h3>${safe(j.title)}</h3><p>${safe(j.description)}</p><small>${safe(j.country||"Worldwide")} · ${safe(j.author)}</small></div>`;
-    }).join("") || '<div class="card">No jobs published yet.</div>';
-  }catch(e){$("jobList").textContent="Jobs error: "+errorText(e);}
+function listenStories(){
+ if(storyStop)storyStop();
+ storyStop=onSnapshot(query(collection(db,"stories"),orderBy("createdAt","desc"),limit(50)),snap=>{
+  const now=Date.now(),items=snap.docs.map(d=>({id:d.id,...d.data()})).filter(s=>!s.expiresAt||s.expiresAt>now);
+  $("stories").innerHTML=items.map(s=>`<div class="story" data-story="${esc(s.id)}"><div class="storyring"><img src="${esc(s.photoURL||s.mediaURL||avatarFallback)}" alt=""></div><div>${esc(s.author||"Creator")}</div></div>`).join("")||'<span class="muted">No stories yet. Add your first story.</span>';
+  $("stories").querySelectorAll("[data-story]").forEach(el=>el.onclick=()=>{const s=items.find(x=>x.id===el.dataset.story);if(!s)return;const w=window.open("about:blank","_blank");if(!w)return toast("Allow pop-ups to view story.");w.document.write("<title>ZYNORA Story</title><body style='margin:0;background:#111;color:white;text-align:center;font:18px Arial'>");w.document.write("<h3>"+esc(s.author)+"</h3><p>"+esc(s.caption||"")+"</p>");if(s.mediaURL){if(s.type==="video")w.document.write("<video src='"+esc(s.mediaURL)+"' controls autoplay style='max-width:100%;max-height:75vh'></video>");else w.document.write("<img src='"+esc(s.mediaURL)+"' style='max-width:100%;max-height:75vh'>");}w.document.close();});
+ },errMsg);
 }
 
-$("saveProfile").addEventListener("click",async()=>{
-  try{
-    const name=$("profileName").value.trim();
-    const bio=$("profileBio").value.trim();
-    let photoURL=currentUser.photoURL||"";
-    const file=$("profileFile").files[0];
-    if(file) photoURL=await uploadFile(file,"profiles");
-    if(name) await updateProfile(currentUser,{displayName:name,photoURL});
-    await setDoc(doc(db,"users",currentUser.uid),{
-      name:name||currentUser.displayName||"",
-      email:currentUser.email,bio,photoURL,updatedAt:serverTimestamp()
-    },{merge:true});
-    $("userLabel").textContent=name||currentUser.email;
-    $("profilePhoto").src=photoURL||"";
-    alert("Profile saved.");
-  }catch(e){alert(errorText(e));}
-});
-async function loadProfile(){
-  if(!currentUser)return;
-  try{
-    const snap=await getDoc(doc(db,"users",currentUser.uid));
-    const p=snap.exists()?snap.data():{};
-    $("profileName").value=p.name||currentUser.displayName||"";
-    $("profileBio").value=p.bio||"";
-    $("profilePhoto").src=p.photoURL||currentUser.photoURL||"";
-    $("myPosts").innerHTML=allPosts.filter(p=>p.uid===currentUser.uid).map(p=>renderPost(p,p.id)).join("");
-    bindPostActions($("myPosts"));
-  }catch(e){console.error(e);}
+async function addProduct(){
+ if(!user)return toast("Sign in first.");
+ const name=$("productName").value.trim(),price=Number($("productPrice").value),description=$("productDesc").value.trim();
+ if(!name||!Number.isFinite(price)||price<0)return toast("Enter a product name and valid price.");
+ try{
+  await addDoc(collection(db,"products"),{uid:user.uid,seller:user.displayName||user.email,name,price,description,createdAt:serverTimestamp()});
+  $("productName").value="";$("productPrice").value="";$("productDesc").value="";toast("Product listed.");
+ }catch(e){errMsg(e);}
 }
+function loadProducts(){
+ if(productStop)productStop();
+ productStop=onSnapshot(query(collection(db,"products"),orderBy("createdAt","desc"),limit(60)),snap=>{
+  products=snap.docs.map(d=>({id:d.id,...d.data()}));
+  $("products").innerHTML=products.map(p=>`<div class="card"><h3>${esc(p.name)}</h3><b>Price: ${esc(p.price)}</b><p>${esc(p.description||"")}</p><div class="muted">Seller: ${esc(p.seller||"Creator")}</div><button class="secondary" data-seller="${esc(p.uid)}">Contact seller</button></div>`).join("")||'<div class="card">No products listed yet.</div>';
+  $("products").querySelectorAll("[data-seller]").forEach(b=>b.onclick=()=>{const p=products.find(x=>x.uid===b.dataset.seller);if(!p)return;showPage("messages");$("chatEmail").value=p.email||"";toast("Enter the seller's registered email to start a chat.");});
+ },errMsg);
+}
+
+$("profileForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!user)return;
+ try{
+  const name=$("profileNameInput").value.trim()||user.displayName||"Creator";
+  let photoURL=user.photoURL||"";
+  const file=$("avatarInput").files[0];
+  if(file){if(!file.type.startsWith("image/"))throw new Error("Choose an image.");photoURL=await uploadFile(file,`avatars/${user.uid}/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);}
+  await updateProfile(user,{displayName:name,photoURL});
+  await setDoc(doc(db,"users",user.uid),{uid:user.uid,email:user.email||"",displayName:name,photoURL},{merge:true});
+  $("topName").textContent=name;$("topAvatar").src=photoURL||avatarFallback;
+  toast("Profile saved.");renderProfile();
+ }catch(e){errMsg(e);}
+});
+function renderProfile(){
+ if(!user)return;
+ $("profileName").textContent=user.displayName||"Creator";$("profileEmail").textContent=user.email||"";
+ $("profileNameInput").value=user.displayName||"";
+ $("profileAvatar").src=user.photoURL||avatarFallback;
+ const own=posts.filter(p=>p.uid===user.uid);
+ $("profileCount").textContent=own.length+" posts";
+ $("profilePosts").innerHTML=own.filter(p=>p.mediaURL).map(p=>p.type==="video"?`<video src="${esc(p.mediaURL)}" controls></video>`:`<img src="${esc(p.mediaURL)}" alt="">`).join("");
+}
+
+$("aiForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!user)return toast("Sign in first.");
+ const promptText=$("aiPrompt").value.trim();if(!promptText)return;
+ $("aiPrompt").value="";$("aiSend").disabled=true;
+ $("aiHistory").insertAdjacentHTML("beforeend",`<div class="card"><b>You</b><p class="posttext">${esc(promptText)}</p></div>`);
+ const waiting=document.createElement("div");waiting.className="card";waiting.textContent="AI is thinking...";$("aiHistory").append(waiting);
+ try{
+  if(!aiModel)throw new Error("AI failed to initialize. Check Firebase AI Logic setup.");
+  const result=await aiModel.generateContent(promptText);
+  waiting.innerHTML="<b>ZYNORA AI</b><p class='posttext'></p>";
+  waiting.querySelector("p").textContent=result.response.text();
+ }catch(e){waiting.textContent="AI error: "+(e.message||e);console.error(e);}
+ finally{$("aiSend").disabled=false;}
+});
+
+window.openChat=()=>{
+ if(!user)return toast("Sign in first.");
+ const email=$("chatEmail").value.trim().toLowerCase();
+ if(!email||email===user.email?.toLowerCase())return toast("Enter another registered user's email.");
+ activeChat=[user.email.toLowerCase(),email].sort().join("__");
+ $("chatTitle").textContent="Conversation with "+email;
+ if(chatStop)chatStop();
+ const chatId=btoa(unescape(encodeURIComponent(activeChat))).replace(/[/+=]/g,"_");
+ chatStop=onSnapshot(query(collection(db,"chats",chatId,"messages"),orderBy("createdAt","asc"),limit(100)),snap=>{
+  $("chatHistory").innerHTML=snap.docs.map(d=>{const m=d.data();return `<div class="card"><b>${esc(m.senderEmail===user.email?"You":m.senderEmail)}</b><p>${esc(m.text)}</p></div>`;}).join("")||'<p class="muted">No messages yet.</p>';
+ },errMsg);
+ $("chatForm").dataset.chatid=chatId;
+};
+$("chatForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!user)return toast("Sign in first.");
+ const chatId=e.currentTarget.dataset.chatid,text=$("chatMessage").value.trim();
+ if(!chatId||!text)return toast("Open a conversation first.");
+ try{
+  await addDoc(collection(db,"chats",chatId,"messages"),{senderUid:user.uid,senderEmail:user.email||"",text,createdAt:serverTimestamp()});
+  $("chatMessage").value="";
+ }catch(e){errMsg(e);}
+});
+
+window.startCamera=async useAudio=>{
+ try{
+  stopCamera();
+  cameraStream=await navigator.mediaDevices.getUserMedia({video:true,audio:!!useAudio});
+  $("cameraPreview").srcObject=cameraStream;$("callPreview").srcObject=cameraStream;
+  toast("Camera preview enabled. Not broadcasting.");
+ }catch(e){errMsg(e);}
+};
+window.stopCamera=()=>{
+ if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop());
+ cameraStream=null;$("cameraPreview").srcObject=null;$("callPreview").srcObject=null;
+};
+window.applyFilter=()=>{$("cameraPreview").style.filter=$("filterSelect").value;};
+window.capturePhoto=()=>{
+ const v=$("cameraPreview");
+ if(!v.videoWidth)return toast("Start the camera first.");
+ const c=document.createElement("canvas");c.width=v.videoWidth;c.height=v.videoHeight;
+ const ctx=c.getContext("2d");ctx.filter=$("filterSelect").value;ctx.drawImage(v,0,0);
+ c.toBlob(blob=>{if(!blob)return toast("Could not capture photo.");const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="zynora-photo.jpg";a.click();URL.revokeObjectURL(a.href);},"image/jpeg",.92);
+};
+window.logout=async()=>{stopCamera();try{await signOut(auth);toast("Signed out.");}catch(e){errMsg(e);}};
+window.testFirebase=async()=>{
+ try{if(!user)throw new Error("Sign in first.");await getDoc(doc(db,"users",user.uid));$("settingsInfo").textContent="Firebase Auth + Firestore read test succeeded.";toast("Firebase connection works.");}
+ catch(e){$("settingsInfo").textContent=e.message;errMsg(e);}
+};
+window.showRulesHelp=()=>{$("settingsInfo").textContent="Firebase Console → Firestore Database → Rules; and Storage → Rules. Configure owner-based rules before public launch. Never use allow read, write: if true in production.";};
+window.enableNotifications=async()=>{
+ if(!("Notification" in window))return toast("This browser does not support notifications.");
+ try{const p=await Notification.requestPermission();toast("Browser notification permission: "+p+". Push delivery still needs FCM setup and a service worker.");}
+ catch(e){errMsg(e);}
+};
+window.addEventListener("beforeunload",()=>{if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop());});
 </script>
 </body>
 </html>
