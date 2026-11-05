@@ -4,235 +4,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090911">
-<title>ZYNORA — The Future of Everything</title>
+<meta name="theme-color" content="#090914">
+<title>ZYNORA — Living Intelligence</title>
 <style>
-:root{--bg:#090911;--panel:#13131f;--panel2:#202033;--line:#2d2d42;--text:#f8f7ff;--muted:#aaa8c0;--purple:#9361ff;--pink:#f044a0}
+:root{--bg:#090914;--panel:#141421;--panel2:#1e1e30;--line:#303047;--text:#f7f7ff;--muted:#a7a7c0;--purple:#b49aff;--blue:#76d7ff;--green:#86efac;--red:#ffabb7}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-button,input,textarea{font:inherit}
-button{border:0;border-radius:10px;padding:11px 14px;color:white;background:var(--panel2);cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
-.primary{background:linear-gradient(110deg,#7047f5,#d839a0);font-weight:bold}
-.ghost{border:1px solid var(--line);background:transparent}
-input,textarea{width:100%;padding:12px;background:#0b0b14;border:1px solid var(--line);border-radius:10px;color:white;margin:6px 0;outline:none}
-textarea{min-height:85px;resize:vertical}
-input:focus,textarea:focus{border-color:var(--purple)}
-header{height:65px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;background:#090911ee;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:5}
-.logo{font-size:25px;letter-spacing:2px;font-weight:900;background:linear-gradient(90deg,#fff,#bba0ff,#ff76c6);color:transparent;background-clip:text}
-.header-right{display:flex;align-items:center;gap:12px}
-.muted{font-size:13px;color:var(--muted);line-height:1.5}
-.layout{max-width:1400px;margin:auto;padding:22px 16px;display:grid;grid-template-columns:205px minmax(0,650px) 235px;gap:22px;justify-content:center}
-.sidebar{position:sticky;top:85px;height:max-content}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:15px;min-width:0}
-.navbtn{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:transparent;color:#c7c5d8;margin-top:4px}
-.navbtn:hover,.navbtn.active{background:var(--panel2);color:white}
-.navicon{font-size:20px;width:25px;text-align:center}
-h2{font-size:21px}h3{font-size:16px}
-h2,h3,p{margin-top:0}
-.row{display:flex;align-items:center;gap:10px;min-width:0}
+body{margin:0;background:radial-gradient(ellipse at top,#17152c 0,#090914 50%);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;line-height:1.6}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+.wrap{max-width:1120px;margin:auto;padding:18px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:12px 0 20px}
+.brand{font-size:27px;font-weight:950;letter-spacing:2px}
+.brand span{color:var(--purple)}
+.small{font-size:13px;color:var(--muted)}
+.hero{padding:38px 0 24px}
+.hero h1{font-size:clamp(34px,6vw,62px);line-height:1.06;letter-spacing:-2px;margin:12px 0}
+.gradient{background:linear-gradient(90deg,#c4b5fd,#7dd3fc);background-clip:text;color:transparent}
+.card,.job{background:linear-gradient(145deg,#171727,#11111d);border:1px solid var(--line);border-radius:19px;padding:21px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.field{display:grid;gap:6px;margin:14px 0}
+label{font-size:13px;color:var(--muted)}
+input,textarea,select{width:100%;padding:13px;border-radius:11px;border:1px solid var(--line);background:#0c0c17;color:var(--text);outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--purple)}
+textarea{min-height:110px;resize:vertical}
+.btn{padding:11px 16px;border:0;border-radius:11px;background:linear-gradient(100deg,#c4b5fd,#8ddfff);color:#121020;font-weight:800}
+.btn.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+.btn.danger{background:#48212d;color:#ffdce1}
+.btn.sm{padding:7px 11px;font-size:13px}
+.row,.between{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .between{justify-content:space-between}
-.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#302546;flex-shrink:0}
-.small{width:32px;height:32px}
-.stories{display:flex;gap:13px;overflow-x:auto;padding:14px 0 3px}
-.story{background:transparent;padding:2px;min-width:65px;text-align:center;font-size:12px}
-.story-ring{width:58px;height:58px;border-radius:50%;padding:3px;margin:auto auto 6px;background:linear-gradient(135deg,#895cff,#ed3eab,#ffb84d)}
-.story-ring img{width:100%;height:100%;object-fit:cover;border:3px solid var(--panel);border-radius:50%}
-.post{padding:0;overflow:hidden}
-.post-head{display:flex;align-items:center;gap:10px;padding:14px}
-.post-content{white-space:pre-wrap;overflow-wrap:anywhere;padding:0 14px 14px}
-.post-media{display:block;width:100%;max-height:650px;object-fit:contain;background:#050507}
-.post-actions{display:flex;gap:5px;flex-wrap:wrap;padding:10px;border-top:1px solid var(--line)}
-.action{background:transparent;padding:8px;color:#d2cfe4}
-.liked{color:#ff76a9}
-.comment-area{padding:0 13px 13px}
-.comment{font-size:13px;padding:7px 0;overflow-wrap:anywhere}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0 22px}
+.tab{padding:10px 13px;border-radius:11px;border:1px solid var(--line);background:#141421;color:var(--muted)}
+.tab.active{border-color:var(--purple);background:#29223e;color:white}
+.pill{display:inline-block;padding:4px 10px;border-radius:30px;background:#29233e;color:#e2d7ff;font-size:12px}
+.status{white-space:pre-wrap;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:14px 0}
+.status.success{color:var(--green)}
+.status.error{color:var(--red)}
 .hidden{display:none!important}
-.auth-wrap{max-width:430px;margin:7vh auto;padding:15px}
-.auth-card{padding:25px;background:var(--panel);border:1px solid var(--line);border-radius:20px}
-.auth-card .logo{text-align:center;font-size:32px}
-.auth-card button{width:100%;margin-top:9px}
-.notice{padding:11px;background:#211b34;border-radius:9px;margin:10px 0;font-size:13px;overflow-wrap:anywhere}
-.error{color:#ff9ba9}
-.profile-cover{height:100px;border-radius:12px;background:linear-gradient(120deg,#5223bd,#c12c87,#086f9d);margin-bottom:-28px}
-.profile-big{width:76px;height:76px;border-radius:50%;object-fit:cover;border:4px solid var(--panel)}
-.stat{flex:1;text-align:center;background:var(--panel2);padding:12px 4px;border-radius:10px}
-.stat strong{display:block;font-size:19px}.stat span{font-size:11px;color:var(--muted)}
-.grid-posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
-.grid-posts img,.grid-posts video,.grid-text{width:100%;aspect-ratio:1;object-fit:cover;background:var(--panel2)}
-.grid-text{padding:8px;overflow:hidden;font-size:12px}
-.bottom-nav{display:none}
-#toast{position:fixed;z-index:20;bottom:24px;left:50%;transform:translateX(-50%);background:#25243a;border:1px solid #48445e;padding:12px 18px;border-radius:12px;max-width:92%;display:none}
-footer{text-align:center;color:#77758b;font-size:11px;line-height:1.8;padding:20px}
-hr{border:0;border-top:1px solid var(--line)}
-@media(max-width:1000px){.layout{grid-template-columns:180px minmax(0,650px)}.rightbar{display:none}}
-@media(max-width:650px){
- header{height:57px;padding:0 12px}.logo{font-size:22px}
- .layout{display:block;padding:12px 9px 85px}.sidebar{display:none}
- .bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#10101af5;border-top:1px solid var(--line);padding:8px 2px calc(8px + env(safe-area-inset-bottom));z-index:10}
- .bottom-nav button{background:transparent;padding:5px 7px;font-size:19px}
- .bottom-nav span{display:block;font-size:10px;margin-top:3px}
- .panel{padding:12px}.post-head{padding:11px}.post-content{padding:0 11px 11px}.post-actions{padding:6px}
- .auth-wrap{margin:4vh auto;padding:12px}
-}
+.smallline{border:0;border-top:1px solid var(--line);margin:18px 0}
+.feature{padding:16px;border:1px solid var(--line);border-radius:16px;background:#141421}
+.feature h3{margin:8px 0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:35px 0}
+#loading{text-align:center;padding:35px;color:var(--muted)}
+@media(max-width:680px){.wrap{padding:12px}.grid{grid-template-columns:1fr}.card{padding:16px}.hero{padding-top:26px}.brand{font-size:22px}.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tab{width:100%}}
 </style>
 </head>
 <body>
+<div class="wrap">
 <header>
-  <div class="logo">ZYNORA</div>
-  <div class="header-right">
-    <span id="headerUser" class="muted"></span>
-    <button class="ghost" id="headerAuth">Login</button>
+  <div>
+    <div class="brand">ZYN<span>ORA</span></div>
+    <div class="small">LIVING INTELLIGENCE · MADE IN MIAN ABDULLAH</div>
+  </div>
+  <div id="userHeader" class="hidden row">
+    <span id="headerName" class="small"></span>
+    <button id="logoutBtn" class="btn secondary sm">Logout</button>
   </div>
 </header>
 
-<section id="authScreen" class="auth-wrap">
-  <div class="auth-card">
-    <div class="logo">ZYNORA</div>
-    <p class="muted" style="text-align:center">THE FUTURE OF EVERYTHING</p>
-    <h2 id="authTitle" style="text-align:center">Join the new digital world</h2>
-    <p class="muted" style="text-align:center">Create your account and share your world.</p>
-    <div id="authMessage" class="notice hidden"></div>
+<div id="status" class="status hidden" role="status" aria-live="polite"></div>
+<div id="loading">ZYNORA start ho raha hai...</div>
+
+<section id="authView" class="hidden">
+  <div class="hero">
+    <span class="pill">IDEAS · SKILLS · OPPORTUNITIES</span>
+    <h1>Build your future with <span class="gradient">intelligence.</span></h1>
+    <p class="small">Apni skills share karein, jobs dhoondein aur apne goals ka plan banayein.</p>
+  </div>
+  <div class="grid">
+    <div class="feature"><div class="pill">01 · CREATE</div><h3>Apni profile banayein</h3><p class="small">Apni skills aur experience duniya ko dikhayein.</p></div>
+    <div class="feature"><div class="pill">02 · DISCOVER</div><h3>Naye kaam dhoondein</h3><p class="small">Jobs explore karein aur proposals bhejein.</p></div>
+  </div>
+  <div class="card">
+    <div class="tabs">
+      <button id="loginTab" class="tab active">Login</button>
+      <button id="signupTab" class="tab">Create account</button>
+    </div>
     <form id="authForm">
-      <input id="authName" placeholder="Your display name" maxlength="40" autocomplete="name" required>
-      <input id="authEmail" type="email" placeholder="Email address" autocomplete="email" required>
-      <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)" minlength="6" autocomplete="current-password" required>
-      <button class="primary" id="authSubmit" type="submit">Create account</button>
+      <div id="nameField" class="field hidden">
+        <label for="authName">Your name</label>
+        <input id="authName" maxlength="60" autocomplete="name" placeholder="Apna naam">
+      </div>
+      <div class="field">
+        <label for="authEmail">Email address</label>
+        <input id="authEmail" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="authPassword">Password (minimum 6 characters)</label>
+        <input id="authPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="Password">
+      </div>
+      <button id="authSubmit" class="btn" type="submit">Login</button>
     </form>
-    <button class="ghost" id="googleBtn" type="button">Continue with Google</button>
-    <button class="ghost" id="toggleAuth" type="button">Already have an account? Login</button>
-    <p class="muted" style="text-align:center;margin-top:20px">MADE IN MIAN ABDULLAH</p>
+    <p class="small">Signup aur login Firebase Authentication use karte hain.</p>
   </div>
 </section>
 
-<div id="mainApp" class="layout hidden">
-  <aside class="sidebar">
-    <div class="panel">
-      <div class="logo" style="font-size:20px">ZYNORA</div>
-      <p class="muted">Your world. Your people.</p>
-      <button class="navbtn active" data-page="home"><span class="navicon">⌂</span> Home Feed</button>
-      <button class="navbtn" data-page="reels"><span class="navicon">▶</span> Videos</button>
-      <button class="navbtn" data-page="create"><span class="navicon">＋</span> Create Post</button>
-      <button class="navbtn" data-page="profile"><span class="navicon">◎</span> My Profile</button>
-      <button class="navbtn" data-page="settings"><span class="navicon">⚙</span> Settings</button>
+<section id="appView" class="hidden">
+  <div class="hero">
+    <span class="pill">YOUR NEXT CHAPTER STARTS HERE</span>
+    <h1>Think bigger.<br><span class="gradient">Build something real.</span></h1>
+    <p class="small">ZYNORA aapko kaam, skills aur goals ek jagah manage karne mein madad deta hai.</p>
+  </div>
+  <div class="grid">
+    <div class="feature"><span class="pill">WORK</span><h3>Real job listings</h3><p class="small">Firestore mein jobs save aur load karein.</p></div>
+    <div class="feature"><span class="pill">GROW</span><h3>Personal task planner</h3><p class="small">Apne goal ke liye action plan banayein.</p></div>
+  </div>
+
+  <nav class="tabs" id="mainTabs">
+    <button class="tab active" data-page="jobs">Explore jobs</button>
+    <button class="tab" data-page="post">Post a job</button>
+    <button class="tab" data-page="proposals">My proposals</button>
+    <button class="tab" data-page="profile">My profile</button>
+    <button class="tab" data-page="helper">Task helper</button>
+  </nav>
+
+  <section id="page-jobs" class="page">
+    <div class="between">
+      <div><h2>Explore opportunities</h2><p class="small">Doosre users ke open jobs.</p></div>
+      <button id="refreshJobs" class="btn secondary">Refresh</button>
     </div>
-    <div class="panel muted">Share your creativity. Respect your community.</div>
-  </aside>
+    <div class="field"><label for="jobSearch">Search jobs</label><input id="jobSearch" placeholder="Design, writing, website..."></div>
+    <div id="jobsList"><p class="small">Jobs load ho rahe hain...</p></div>
+  </section>
 
-  <main>
-    <section id="homePage">
-      <div class="panel">
-        <div class="row between">
-          <div><h3 style="margin-bottom:3px">Your moments</h3><div class="muted">Stories from your world</div></div>
-          <button class="primary" onclick="go('create')">＋ Create</button>
+  <section id="page-post" class="page hidden">
+    <div class="card">
+      <h2>Publish a job</h2>
+      <p class="small">Job ki requirements clear likhein. Payment is version mein process nahi hoti.</p>
+      <form id="jobForm">
+        <div class="field"><label for="jobTitle">Job title</label><input id="jobTitle" required minlength="3" maxlength="100" placeholder="e.g. Design a business logo"></div>
+        <div class="grid">
+          <div class="field"><label for="jobCategory">Category</label>
+            <select id="jobCategory">
+              <option>Design</option><option>Writing</option><option>Web development</option>
+              <option>Marketing</option><option>Video editing</option><option>Teaching</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field"><label for="jobBudget">Budget (optional)</label><input id="jobBudget" maxlength="40" placeholder="e.g. PKR 3000"></div>
         </div>
-        <div id="stories" class="stories"><span class="muted">Loading stories…</span></div>
-      </div>
-      <div id="feedStatus" class="muted" style="padding:8px">Loading posts…</div>
-      <div id="feed"></div>
-      <button id="refreshBtn" class="ghost" style="width:100%">Refresh feed</button>
-    </section>
-
-    <section id="createPage" class="hidden">
-      <div class="panel">
-        <h2>Create content</h2>
-        <p class="muted">Publish a photo, video or text post. You can also share a story that expires after 24 hours.</p>
-        <form id="postForm">
-          <textarea id="postText" maxlength="2000" placeholder="What's happening in your world?"></textarea>
-          <label class="muted">Choose photo or video (maximum 20 MB)</label>
-          <input id="postFile" type="file" accept="image/*,video/*">
-          <div id="uploadStatus" class="muted"></div>
-          <button class="primary" id="publishBtn" type="submit" style="width:100%;margin-top:8px">Publish post</button>
-          <button class="ghost" id="publishStoryBtn" type="button" style="width:100%;margin-top:8px">Share as 24-hour story</button>
-        </form>
-      </div>
-    </section>
-
-    <section id="profilePage" class="hidden">
-      <div class="panel">
-        <div class="profile-cover"></div>
-        <div class="row" style="align-items:end">
-          <img id="profileAvatar" class="profile-big" alt="Profile photo">
-          <div><h2 id="profileName" style="margin:0 0 4px">My Profile</h2><div id="profileEmail" class="muted"></div></div>
-        </div>
-        <div class="row" style="margin-top:18px">
-          <div class="stat"><strong id="myPostCount">0</strong><span>Posts</span></div>
-          <div class="stat"><strong id="myFollowerCount">0</strong><span>Followers</span></div>
-          <div class="stat"><strong id="myFollowingCount">0</strong><span>Following</span></div>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>Edit profile</h3>
-        <form id="profileForm">
-          <input id="editName" maxlength="40" placeholder="Display name" required>
-          <label class="muted">Profile photo (maximum 5 MB)</label>
-          <input id="avatarFile" type="file" accept="image/*">
-          <button class="primary" type="submit">Save profile</button>
-        </form>
-      </div>
-      <h3>Your posts</h3>
-      <div id="profilePosts" class="grid-posts"></div>
-    </section>
-
-    <section id="reelsPage" class="hidden">
-      <div class="panel"><h2>Video feed</h2><p class="muted">Watch videos shared by creators.</p></div>
-      <div id="reelsFeed"></div>
-    </section>
-
-    <section id="settingsPage" class="hidden">
-      <div class="panel">
-        <h2>Settings</h2>
-        <p class="muted">Manage your account.</p>
-        <p id="settingsEmail" class="muted"></p>
-        <button class="ghost" onclick="go('profile')">Edit profile</button>
-        <button class="ghost" onclick="refreshFeed()">Refresh feed</button>
-        <hr style="margin:17px 0">
-        <button class="primary" style="width:100%;background:#9f1239" onclick="logout()">Log out</button>
-      </div>
-      <div class="panel">
-        <h3>About ZYNORA</h3>
-        <p class="muted">A digital platform for creators, videos, communities and ideas.</p>
-        <p class="muted">MADE IN MIAN ABDULLAH</p>
-      </div>
-    </section>
-  </main>
-
-  <aside class="rightbar">
-    <div class="panel">
-      <h3>Your account</h3>
-      <div class="row"><img id="sideAvatar" class="avatar" alt=""><div><strong id="sideName">Creator</strong><div class="muted">Welcome to ZYNORA</div></div></div>
-      <button class="ghost" style="width:100%;margin-top:14px" onclick="go('profile')">View profile</button>
+        <div class="field"><label for="jobDescription">Job details</label><textarea id="jobDescription" required minlength="10" maxlength="3000" placeholder="Kaam aur expected result batayein..."></textarea></div>
+        <button id="publishJobBtn" class="btn" type="submit">Publish job</button>
+      </form>
     </div>
-    <div class="panel"><h3>Discover</h3><p class="muted">Share your first photo or video and start building your community.</p><button class="primary" style="width:100%" onclick="go('create')">Create content</button></div>
-    <footer>© <span id="year"></span> ZYNORA<br>MADE IN MIAN ABDULLAH</footer>
-  </aside>
+    <h2>My published jobs</h2>
+    <div id="myJobsList"></div>
+  </section>
+
+  <section id="page-proposals" class="page hidden">
+    <h2>My proposals</h2>
+    <p class="small">Aap ne jin jobs par proposal bheja hai.</p>
+    <div id="proposalsList"></div>
+  </section>
+
+  <section id="page-profile" class="page hidden">
+    <div class="card">
+      <h2>Your profile</h2>
+      <form id="profileForm">
+        <div class="field"><label for="profileName">Display name</label><input id="profileName" required maxlength="60"></div>
+        <div class="field"><label for="profileSkills">Your skills</label><input id="profileSkills" maxlength="300" placeholder="Design, writing, coding..."></div>
+        <div class="field"><label for="profileBio">About you</label><textarea id="profileBio" maxlength="700" placeholder="Apne bare mein batayein..."></textarea></div>
+        <button id="saveProfileBtn" class="btn" type="submit">Save profile</button>
+      </form>
+      <p id="profileEmail" class="small"></p>
+    </div>
+  </section>
+
+  <section id="page-helper" class="page hidden">
+    <div class="card">
+      <span class="pill">BASIC TASK PLANNER</span>
+      <h2>Turn your idea into action</h2>
+      <p class="small">Goal likhein. Yeh built-in planner hai, connected generative AI model nahi.</p>
+      <form id="helperForm">
+        <div class="field"><label for="goalInput">Your goal</label><textarea id="goalInput" required maxlength="1200" placeholder="Misal: Main online graphic design ka kaam shuru karna chahta hoon."></textarea></div>
+        <button class="btn" type="submit">Create a plan</button>
+      </form>
+      <div id="helperResult" class="hidden"></div>
+    </div>
+  </section>
+</section>
+<footer>ZYNORA Living Intelligence · MVP v1 · MADE IN MIAN ABDULLAH</footer>
 </div>
 
-<nav id="bottomNav" class="bottom-nav hidden">
-  <button data-page="home">⌂<span>Home</span></button>
-  <button data-page="reels">▶<span>Videos</span></button>
-  <button data-page="create">＋<span>Create</span></button>
-  <button data-page="profile">◎<span>Profile</span></button>
-  <button data-page="settings">⚙<span>Settings</span></button>
-</nav>
-<div id="toast"></div>
-
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import {
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  GoogleAuthProvider, signInWithPopup, onAuthStateChanged, updateProfile, signOut
+  onAuthStateChanged, signOut, updateProfile
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import {
-  getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc,
-  query, orderBy, limit, onSnapshot, serverTimestamp, arrayUnion,
-  arrayRemove, where, getDocs, increment
+  getFirestore, doc, getDoc, setDoc, collection, addDoc,
+  getDocs, query, where, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-import {
-  getStorage, ref, uploadBytesResumable, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
 
-/* YOUR ZYNORA FIREBASE CONFIGURATION */
+/* Aapka real ZYNORA Firebase configuration */
 const firebaseConfig = {
   apiKey: "AIzaSyDWXEZIo11dbkhw69tIwH7BGhPIPRbuebU",
   authDomain: "zynora-a7d7a.firebaseapp.com",
@@ -243,453 +208,373 @@ const firebaseConfig = {
   measurementId: "G-6CMRSS4J62"
 };
 
-const $ = id => document.getElementById(id);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
-const googleProvider = new GoogleAuthProvider();
+const $ = id => document.getElementById(id);
 
 let currentUser = null;
-let signupMode = true;
-let stopFeed = null;
-let stopStories = null;
-let cachedPosts = [];
-let profileCache = {};
+let currentProfile = {};
+let authMode = "login";
+let allJobs = [];
+let myProposals = [];
 
-const defaultAvatar = "https://ui-avatars.com/api/?name=ZYNORA&background=302546&color=fff";
-const escapeHTML = v => String(v ?? "").replace(/[&<>"']/g, c => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
+function status(message, type="") {
+  const el = $("status");
+  el.textContent = message;
+  el.className = "status" + (type ? " " + type : "");
+  el.classList.remove("hidden");
+}
+function clearStatus(){ $("status").classList.add("hidden"); }
 
-function toast(message) {
-  $("toast").textContent = message;
-  $("toast").style.display = "block";
-  clearTimeout(window.zynoraToastTimer);
-  window.zynoraToastTimer = setTimeout(() => $("toast").style.display="none", 3500);
-}
-function showAuthMessage(message, error=false) {
-  $("authMessage").textContent = message;
-  $("authMessage").classList.remove("hidden");
-  $("authMessage").classList.toggle("error",error);
-}
-function errorText(e) {
-  const known = {
-    "auth/email-already-in-use":"This email already has an account. Please log in.",
-    "auth/invalid-email":"Please enter a valid email address.",
-    "auth/weak-password":"Please choose a stronger password.",
-    "auth/invalid-credential":"Email or password is incorrect.",
-    "auth/user-not-found":"Account not found. Please sign up.",
-    "auth/unauthorized-domain":"Add this website under Firebase Authentication → Settings → Authorized domains.",
-    "auth/popup-closed-by-user":"Google sign-in was cancelled.",
-    "permission-denied":"Permission denied. Check your Firestore security rules.",
-    "storage/unauthorized":"Upload denied. Check Firebase Storage setup and rules.",
-    "unavailable":"Firebase is temporarily unavailable. Check your internet connection."
+function explainError(error) {
+  const messages = {
+    "auth/email-already-in-use":"Yeh email pehle se registered hai. Login karein.",
+    "auth/invalid-email":"Email address sahi nahi hai.",
+    "auth/weak-password":"Password kam az kam 6 characters ka hona chahiye.",
+    "auth/invalid-credential":"Email ya password ghalat hai.",
+    "auth/too-many-requests":"Bohat zyada attempts hue. Kuch der baad try karein.",
+    "auth/unauthorized-domain":"Firebase Authentication ke Authorized domains mein website ka hostname add karein.",
+    "permission-denied":"Firestore rules ne action roka. Rules publish aur login check karein.",
+    "unavailable":"Network ya Firebase service available nahi. Dobara try karein."
   };
-  return known[e?.code] || e?.message || "Something went wrong. Please try again.";
+  return messages[error?.code] || error?.message || "Kuch ghalat hua. Dobara try karein.";
 }
-function requireUser() {
-  if (!currentUser) throw new Error("Please log in first.");
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
 }
-function showMain() {
-  $("authScreen").classList.add("hidden");
-  $("mainApp").classList.remove("hidden");
-  $("bottomNav").classList.remove("hidden");
+function dateText(timestamp) {
+  if (!timestamp?.toDate) return "Just now";
+  return timestamp.toDate().toLocaleDateString();
 }
-function showAuth() {
-  $("authScreen").classList.remove("hidden");
-  $("mainApp").classList.add("hidden");
-  $("bottomNav").classList.add("hidden");
+function busy(button, isBusy, busyText="Please wait...") {
+  if (isBusy) {
+    button.dataset.previousText = button.textContent;
+    button.disabled = true;
+    button.textContent = busyText;
+  } else {
+    button.disabled = false;
+    button.textContent = button.dataset.previousText || button.textContent;
+  }
 }
-window.go = function(page) {
-  if (!currentUser) { showAuth(); return; }
-  document.querySelectorAll("main > section").forEach(s=>s.classList.add("hidden"));
-  const section = $(page+"Page");
-  if (section) section.classList.remove("hidden");
-  document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  if (page==="profile") loadMyProfile();
-  if (page==="reels") renderReels();
-  window.scrollTo({top:0,behavior:"smooth"});
-};
-window.logout = async () => {
-  try { await signOut(auth); toast("Logged out."); }
-  catch(e) { toast(errorText(e)); }
-};
-window.refreshFeed = () => {
-  if (currentUser) startFeed();
-};
-$("headerAuth").onclick = () => currentUser ? go("settings") : showAuth();
-$("year").textContent = new Date().getFullYear();
-document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+function switchAuth(mode) {
+  authMode = mode;
+  $("loginTab").classList.toggle("active", mode === "login");
+  $("signupTab").classList.toggle("active", mode === "signup");
+  $("nameField").classList.toggle("hidden", mode !== "signup");
+  $("authSubmit").textContent = mode === "login" ? "Login" : "Create account";
+  $("authPassword").autocomplete = mode === "login" ? "current-password" : "new-password";
+}
+function showPage(name) {
+  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
+  $("page-" + name).classList.remove("hidden");
+  document.querySelectorAll("#mainTabs .tab").forEach(el =>
+    el.classList.toggle("active", el.dataset.page === name)
+  );
+  if (name === "jobs") loadJobs();
+  if (name === "post") loadMyJobs();
+  if (name === "proposals") loadProposals();
+}
+$("loginTab").addEventListener("click", () => switchAuth("login"));
+$("signupTab").addEventListener("click", () => switchAuth("signup"));
+document.querySelectorAll("#mainTabs .tab").forEach(btn =>
+  btn.addEventListener("click", () => showPage(btn.dataset.page))
+);
 
-$("toggleAuth").addEventListener("click",()=>{
-  signupMode=!signupMode;
-  $("authTitle").textContent=signupMode?"Join the new digital world":"Welcome back";
-  $("authName").classList.toggle("hidden",!signupMode);
-  $("authName").required=signupMode;
-  $("authSubmit").textContent=signupMode?"Create account":"Login";
-  $("toggleAuth").textContent=signupMode?"Already have an account? Login":"New here? Create account";
-  $("authMessage").classList.add("hidden");
-});
-
-$("authForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  $("authSubmit").disabled=true;
+$("authForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearStatus();
+  const button = $("authSubmit");
+  busy(button, true);
   try {
-    const email=$("authEmail").value.trim();
-    const password=$("authPassword").value;
-    if(signupMode){
-      const name=$("authName").value.trim();
-      if(!name) throw new Error("Please enter your display name.");
-      const result=await createUserWithEmailAndPassword(auth,email,password);
-      await updateProfile(result.user,{displayName:name});
-      await setDoc(doc(db,"users",result.user.uid),{
-        uid:result.user.uid,name,email,photoURL:"",
-        followers:[],following:[],createdAt:serverTimestamp()
-      },{merge:true});
+    const email = $("authEmail").value.trim();
+    const password = $("authPassword").value;
+    if (authMode === "signup") {
+      const name = $("authName").value.trim();
+      if (!name) throw new Error("Signup ke liye apna naam likhein.");
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(result.user, {displayName:name});
+      await setDoc(doc(db, "users", result.user.uid), {
+        name, skills:"", bio:"", email:result.user.email || "",
+        createdAt:serverTimestamp(), updatedAt:serverTimestamp()
+      });
+      status("Account ban gaya! ZYNORA mein welcome.", "success");
     } else {
-      await signInWithEmailAndPassword(auth,email,password);
+      await signInWithEmailAndPassword(auth, email, password);
+      status("Login successful.", "success");
     }
-  } catch(e) { showAuthMessage(errorText(e),true); }
-  finally { $("authSubmit").disabled=false; }
+  } catch(error) {
+    status(explainError(error), "error");
+  } finally {
+    busy(button, false);
+  }
 });
 
-$("googleBtn").addEventListener("click",async()=>{
+$("logoutBtn").addEventListener("click", async () => {
   try {
-    const result=await signInWithPopup(auth,googleProvider);
-    const u=result.user;
-    await setDoc(doc(db,"users",u.uid),{
-      uid:u.uid,name:u.displayName||"Creator",email:u.email||"",
-      photoURL:u.photoURL||"",followers:[],following:[],
-      createdAt:serverTimestamp()
-    },{merge:true});
-  } catch(e) { showAuthMessage(errorText(e),true); }
+    await signOut(auth);
+    status("Aap logout ho gaye.");
+  } catch(error) {
+    status(explainError(error), "error");
+  }
 });
 
-onAuthStateChanged(auth,async user=>{
-  currentUser=user;
-  if(!user){
-    if(stopFeed) stopFeed();
-    if(stopStories) stopStories();
-    showAuth();
-    $("headerAuth").textContent="Login";
-    $("headerUser").textContent="";
+onAuthStateChanged(auth, async user => {
+  $("loading").classList.add("hidden");
+  currentUser = user;
+  $("authView").classList.toggle("hidden", !!user);
+  $("appView").classList.toggle("hidden", !user);
+  $("userHeader").classList.toggle("hidden", !user);
+  if (!user) {
+    currentProfile = {};
+    allJobs = [];
+    myProposals = [];
     return;
   }
-  showMain();
-  $("headerAuth").textContent="Settings";
-  $("headerUser").textContent=user.displayName||user.email||"Creator";
+  $("headerName").textContent = user.displayName || user.email || "Member";
   try {
-    await setDoc(doc(db,"users",user.uid),{
-      uid:user.uid,name:user.displayName||"Creator",
-      email:user.email||"",photoURL:user.photoURL||""
-    },{merge:true});
-    profileCache={};
-    await loadMyProfile();
-    startFeed();
-    startStories();
-    go("home");
-  } catch(e) { toast(errorText(e)); }
+    await loadProfile();
+    await loadJobs();
+    await loadMyJobs();
+    await loadProposals();
+  } catch(error) {
+    status("Login ho gaya, lekin data load nahi hua: " + explainError(error), "error");
+  }
 });
 
-async function getUserData(uid) {
-  if(profileCache[uid]) return profileCache[uid];
-  const snap=await getDoc(doc(db,"users",uid));
-  const data=snap.exists()?snap.data():{};
-  profileCache[uid]=data;
-  return data;
-}
-function avatarOf(p) { return p?.photoURL||defaultAvatar; }
-
-async function loadMyProfile() {
-  if(!currentUser) return;
-  const data=await getUserData(currentUser.uid);
-  const name=data.name||currentUser.displayName||"Creator";
-  const photo=data.photoURL||currentUser.photoURL||defaultAvatar;
-  $("profileAvatar").src=photo;
-  $("sideAvatar").src=photo;
-  $("profileName").textContent=name;
-  $("sideName").textContent=name;
-  $("profileEmail").textContent=currentUser.email||"";
-  $("settingsEmail").textContent=currentUser.email||"";
-  $("editName").value=name;
-  $("myFollowerCount").textContent=(data.followers||[]).length;
-  $("myFollowingCount").textContent=(data.following||[]).length;
-  try {
-    const q=query(collection(db,"posts"),where("uid","==",currentUser.uid),orderBy("createdAt","desc"),limit(30));
-    const snap=await getDocs(q);
-    $("myPostCount").textContent=snap.size;
-    $("profilePosts").innerHTML=snap.docs.map(d=>{
-      const p=d.data();
-      if(p.mediaURL && p.mediaType==="video") return `<video src="${escapeHTML(p.mediaURL)}" controls playsinline></video>`;
-      if(p.mediaURL) return `<img src="${escapeHTML(p.mediaURL)}" alt="Post">`;
-      return `<div class="grid-text">${escapeHTML(p.text||"Text post")}</div>`;
-    }).join("");
-  } catch(e) {
-    $("myPostCount").textContent="—";
-    $("profilePosts").innerHTML="";
-    console.warn("Profile query:",e);
-  }
-}
-
-function uploadFile(file,path,statusId="uploadStatus") {
-  return new Promise((resolve,reject)=>{
-    const task=uploadBytesResumable(ref(storage,path),file,{contentType:file.type});
-    task.on("state_changed",snap=>{
-      const percent=Math.round(100*snap.bytesTransferred/snap.totalBytes);
-      $(statusId).textContent=`Uploading… ${percent}%`;
-    },reject,async()=>{
-      try { resolve(await getDownloadURL(task.snapshot.ref)); }
-      catch(e) { reject(e); }
-    });
-  });
-}
-
-$("profileForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(!currentUser) return;
-  const btn=e.submitter;
-  if(btn) btn.disabled=true;
-  try {
-    const name=$("editName").value.trim();
-    if(!name) throw new Error("Display name cannot be empty.");
-    let photoURL=currentUser.photoURL||"";
-    const file=$("avatarFile").files[0];
-    if(file){
-      if(!file.type.startsWith("image/")) throw new Error("Choose an image file.");
-      if(file.size>5*1024*1024) throw new Error("Profile image must be 5 MB or smaller.");
-      photoURL=await uploadFile(file,`avatars/${currentUser.uid}/${Date.now()}-${file.name}`);
-    }
-    await updateProfile(currentUser,{displayName:name,photoURL});
-    await setDoc(doc(db,"users",currentUser.uid),{
-      name,photoURL,email:currentUser.email||""
-    },{merge:true});
-    profileCache={};
-    await loadMyProfile();
-    $("headerUser").textContent=name;
-    $("avatarFile").value="";
-    toast("Profile updated.");
-  } catch(e) { toast(errorText(e)); }
-  finally { if(btn) btn.disabled=false; }
-});
-
-async function savePost(asStory=false) {
-  requireUser();
-  const text=$("postText").value.trim();
-  const file=$("postFile").files[0];
-  if(!text&&!file) throw new Error("Write something or choose a photo/video.");
-  if(file&&file.size>20*1024*1024) throw new Error("File must be 20 MB or smaller.");
-  if(file&&!/^(image\/|video\/)/.test(file.type)) throw new Error("Choose a valid image or video.");
-  const profile=await getUserData(currentUser.uid);
-  let mediaURL="",mediaType="";
-  if(file){
-    mediaType=file.type.startsWith("video/")?"video":"image";
-    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-    const folder=asStory?"stories":"posts";
-    mediaURL=await uploadFile(file,`${folder}/${currentUser.uid}/${Date.now()}-${safeName}`);
-  }
-  const common={
-    uid:currentUser.uid,
-    authorName:profile.name||currentUser.displayName||"Creator",
-    authorPhoto:profile.photoURL||currentUser.photoURL||"",
-    text,mediaURL,mediaType,createdAt:serverTimestamp()
-  };
-  if(asStory){
-    const expiresAt=new Date(Date.now()+24*60*60*1000);
-    await addDoc(collection(db,"stories"),{...common,expiresAt});
-    toast("Your story has been shared for 24 hours.");
+async function loadProfile() {
+  const ref = doc(db, "users", currentUser.uid);
+  const snap = await getDoc(ref);
+  if (snap.exists()) {
+    currentProfile = snap.data();
   } else {
-    await addDoc(collection(db,"posts"),{...common,likes:[],commentCount:0});
-    toast("Your post has been published.");
+    currentProfile = {
+      name:currentUser.displayName || "",
+      email:currentUser.email || "", skills:"", bio:""
+    };
+    await setDoc(ref, {
+      ...currentProfile,
+      createdAt:serverTimestamp(), updatedAt:serverTimestamp()
+    });
   }
-  $("postText").value="";
-  $("postFile").value="";
-  $("uploadStatus").textContent="";
-  profileCache={};
-  go("home");
+  $("profileName").value = currentProfile.name || currentUser.displayName || "";
+  $("profileSkills").value = currentProfile.skills || "";
+  $("profileBio").value = currentProfile.bio || "";
+  $("profileEmail").textContent = "Login email: " + (currentUser.email || "");
+  $("headerName").textContent = currentProfile.name || currentUser.email || "Member";
 }
-$("postForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  $("publishBtn").disabled=true;
-  try { await savePost(false); }
-  catch(e) { toast(errorText(e)); }
-  finally { $("publishBtn").disabled=false; $("uploadStatus").textContent=""; }
-});
-$("publishStoryBtn").addEventListener("click",async()=>{
-  $("publishStoryBtn").disabled=true;
-  try { await savePost(true); }
-  catch(e) { toast(errorText(e)); }
-  finally { $("publishStoryBtn").disabled=false; $("uploadStatus").textContent=""; }
+
+$("profileForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!currentUser) return;
+  const button = $("saveProfileBtn");
+  busy(button, true, "Saving...");
+  try {
+    const name = $("profileName").value.trim();
+    const skills = $("profileSkills").value.trim();
+    const bio = $("profileBio").value.trim();
+    if (!name) throw new Error("Apna naam likhein.");
+    await setDoc(doc(db, "users", currentUser.uid), {
+      name, skills, bio, email:currentUser.email || "",
+      updatedAt:serverTimestamp()
+    }, {merge:true});
+    await updateProfile(currentUser, {displayName:name});
+    currentProfile = {...currentProfile, name, skills, bio};
+    $("headerName").textContent = name;
+    status("Profile save ho gaya.", "success");
+  } catch(error) {
+    status(explainError(error), "error");
+  } finally {
+    busy(button, false);
+  }
 });
 
-function timeLabel(timestamp){
-  if(!timestamp?.toDate) return "Just now";
-  const mins=Math.max(0,Math.floor((Date.now()-timestamp.toDate().getTime())/60000));
-  if(mins<1) return "Just now";
-  if(mins<60) return mins+"m ago";
-  if(mins<1440) return Math.floor(mins/60)+"h ago";
-  return Math.floor(mins/1440)+"d ago";
+async function fetchJobs() {
+  const snapshot = await getDocs(collection(db, "jobs"));
+  allJobs = snapshot.docs.map(d => ({id:d.id, ...d.data()}));
+  allJobs.sort((a,b) =>
+    (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0)
+  );
 }
-function postHTML(id,p){
-  const liked=(p.likes||[]).includes(currentUser?.uid);
-  const media=p.mediaURL?(p.mediaType==="video"
-    ?`<video class="post-media" src="${escapeHTML(p.mediaURL)}" controls playsinline preload="metadata"></video>`
-    :`<img class="post-media" src="${escapeHTML(p.mediaURL)}" alt="Post image" loading="lazy">`):"";
-  return `<article class="panel post" id="post-${escapeHTML(id)}">
-    <div class="post-head">
-      <img class="avatar" src="${escapeHTML(p.authorPhoto||defaultAvatar)}" alt="">
-      <div style="flex:1;min-width:0"><strong>${escapeHTML(p.authorName||"Creator")}</strong><div class="muted">${timeLabel(p.createdAt)}</div></div>
+function jobCard(job, own=false) {
+  const mine = currentUser && job.ownerId === currentUser.uid;
+  const applyButton = !own && !mine && job.status === "open"
+    ? `<button class="btn sm" data-apply="${esc(job.id)}">Send proposal</button>` : "";
+  return `<article class="job">
+    <div class="between">
+      <span class="pill">${esc(job.category || "Other")}</span>
+      <span class="small">${esc(dateText(job.createdAt))}</span>
     </div>
-    ${p.text?`<div class="post-content">${escapeHTML(p.text)}</div>`:""}
-    ${media}
-    <div class="post-actions">
-      <button class="action ${liked?"liked":""}" data-like="${escapeHTML(id)}">${liked?"♥":"♡"} ${(p.likes||[]).length} Like</button>
-      <button class="action" data-comments="${escapeHTML(id)}">💬 ${p.commentCount||0} Comments</button>
-      <button class="action" data-share="${escapeHTML(id)}">↗ Share</button>
-      ${p.uid===currentUser?.uid?`<button class="action" data-delete="${escapeHTML(id)}">Delete</button>`:""}
-    </div>
-    <div class="comment-area hidden" id="comments-${escapeHTML(id)}">
-      <div id="comment-list-${escapeHTML(id)}"></div>
-      <form data-comment-form="${escapeHTML(id)}" class="row">
-        <input name="comment" maxlength="500" placeholder="Write a comment…" required>
-        <button class="primary" type="submit">Send</button>
+    <h3>${esc(job.title)}</h3>
+    <p>${esc(job.description)}</p>
+    <p class="small">Posted by ${esc(job.ownerName || "Member")} · Budget: ${esc(job.budget || "Not specified")}</p>
+    <div class="row"><span class="pill">${esc(job.status || "open")}</span>${applyButton}${mine ? '<span class="small">Your job</span>' : ""}</div>
+    <div id="proposal-form-${esc(job.id)}" class="hidden">
+      <form data-proposal-form="${esc(job.id)}">
+        <div class="field"><label>Proposal details</label><textarea name="message" required minlength="10" maxlength="2000" placeholder="Aap kaam kaise complete karenge?"></textarea></div>
+        <button class="btn sm" type="submit">Submit proposal</button>
+        <button class="btn secondary sm" type="button" data-cancel="${esc(job.id)}">Cancel</button>
       </form>
     </div>
   </article>`;
 }
-
-function startFeed(){
-  if(stopFeed) stopFeed();
-  $("feedStatus").textContent="Loading posts…";
-  const q=query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50));
-  stopFeed=onSnapshot(q,snap=>{
-    cachedPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
-    $("feedStatus").textContent=cachedPosts.length?`${cachedPosts.length} recent posts`:"Be the first to share something!";
-    $("feed").innerHTML=cachedPosts.map(p=>postHTML(p.id,p)).join("");
-    renderReels();
-  },e=>{
-    $("feedStatus").textContent="Posts could not load. Check Firestore setup and rules.";
-    console.error(e);
-  });
+async function loadJobs() {
+  if (!currentUser) return;
+  $("jobsList").innerHTML = '<p class="small">Jobs load ho rahe hain...</p>';
+  try {
+    await fetchJobs();
+    renderJobs();
+  } catch(error) {
+    $("jobsList").innerHTML = "";
+    status("Jobs load nahi huay: " + explainError(error), "error");
+  }
 }
-function renderReels(){
-  const videos=cachedPosts.filter(p=>p.mediaType==="video");
-  $("reelsFeed").innerHTML=videos.length
-    ?videos.map(p=>postHTML(p.id,p)).join("")
-    :`<div class="panel"><h3>No videos yet</h3><p class="muted">Upload the first video to start the feed.</p><button class="primary" onclick="go('create')">Upload a video</button></div>`;
+function renderJobs() {
+  const term = $("jobSearch").value.trim().toLowerCase();
+  const matches = allJobs.filter(job =>
+    job.status === "open" &&
+    job.ownerId !== currentUser.uid &&
+    [job.title,job.description,job.category,job.ownerName].join(" ").toLowerCase().includes(term)
+  );
+  $("jobsList").innerHTML = matches.length
+    ? matches.map(job => jobCard(job)).join("")
+    : '<div class="card"><p>Abhi koi matching open job nahi mila.</p></div>';
 }
-$("refreshBtn").addEventListener("click",()=>{startFeed();toast("Refreshing feed…");});
+$("jobSearch").addEventListener("input", renderJobs);
+$("refreshJobs").addEventListener("click", loadJobs);
 
-document.addEventListener("click",async e=>{
-  const like=e.target.closest("[data-like]");
-  const comments=e.target.closest("[data-comments]");
-  const share=e.target.closest("[data-share]");
-  const del=e.target.closest("[data-delete]");
-  try{
-    if(like){
-      requireUser();
-      const p=cachedPosts.find(x=>x.id===like.dataset.like);
-      if(!p) return;
-      const hasLiked=(p.likes||[]).includes(currentUser.uid);
-      await updateDoc(doc(db,"posts",p.id),{
-        likes:hasLiked?arrayRemove(currentUser.uid):arrayUnion(currentUser.uid)
-      });
+$("jobForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!currentUser) return;
+  const button = $("publishJobBtn");
+  busy(button, true, "Publishing...");
+  try {
+    const title = $("jobTitle").value.trim();
+    const description = $("jobDescription").value.trim();
+    const budget = $("jobBudget").value.trim();
+    const category = $("jobCategory").value;
+    if (title.length < 3 || description.length < 10) {
+      throw new Error("Title kam az kam 3 aur details kam az kam 10 characters hon.");
     }
-    if(comments){
-      const id=comments.dataset.comments;
-      const area=$("comments-"+id);
-      area.classList.toggle("hidden");
-      if(!area.classList.contains("hidden")) await loadComments(id);
-    }
-    if(share){
-      const url=location.href.split("#")[0]+"#post-"+share.dataset.share;
-      if(navigator.share) await navigator.share({title:"ZYNORA post",url});
-      else if(navigator.clipboard){await navigator.clipboard.writeText(url);toast("Post link copied.");}
-      else toast(url);
-    }
-    if(del){
-      requireUser();
-      const p=cachedPosts.find(x=>x.id===del.dataset.delete);
-      if(!p||p.uid!==currentUser.uid) throw new Error("You can only delete your own posts.");
-      if(!confirm("Delete this post?")) return;
-      const {deleteDoc}=await import("https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js");
-      await deleteDoc(doc(db,"posts",p.id));
-      toast("Post deleted.");
-    }
-  }catch(err){toast(errorText(err));}
-});
-
-async function loadComments(postId){
-  const list=$("comment-list-"+postId);
-  list.innerHTML='<div class="muted">Loading comments…</div>';
-  try{
-    const q=query(collection(db,"posts",postId,"comments"),orderBy("createdAt","asc"),limit(50));
-    const snap=await getDocs(q);
-    if(snap.empty){list.innerHTML='<div class="muted">No comments yet. Start the conversation.</div>';return;}
-    const html=await Promise.all(snap.docs.map(async d=>{
-      const c=d.data();
-      return `<div class="comment"><strong>${escapeHTML(c.authorName||"Creator")}</strong> ${escapeHTML(c.text)}</div>`;
-    }));
-    list.innerHTML=html.join("");
-  }catch(e){list.innerHTML='<div class="muted">Comments could not load. Check Firestore rules.</div>';}
-}
-document.addEventListener("submit",async e=>{
-  const form=e.target.closest("[data-comment-form]");
-  if(!form) return;
-  e.preventDefault();
-  try{
-    requireUser();
-    const postId=form.dataset.commentForm;
-    const text=form.elements.comment.value.trim();
-    if(!text) return;
-    const profile=await getUserData(currentUser.uid);
-    await addDoc(collection(db,"posts",postId,"comments"),{
-      uid:currentUser.uid,authorName:profile.name||currentUser.displayName||"Creator",
-      text,createdAt:serverTimestamp()
+    await addDoc(collection(db, "jobs"), {
+      title, description, budget, category,
+      ownerId:currentUser.uid,
+      ownerName:currentProfile.name || currentUser.displayName || "Member",
+      status:"open",
+      createdAt:serverTimestamp()
     });
-    await updateDoc(doc(db,"posts",postId),{commentCount:increment(1)});
-    form.reset();
-    await loadComments(postId);
-  }catch(err){toast(errorText(err));}
+    $("jobForm").reset();
+    status("Job successfully publish ho gaya.", "success");
+    await loadJobs();
+    await loadMyJobs();
+    showPage("jobs");
+  } catch(error) {
+    status(explainError(error), "error");
+  } finally {
+    busy(button, false);
+  }
 });
 
-function startStories(){
-  if(stopStories) stopStories();
-  const q=query(collection(db,"stories"),orderBy("createdAt","desc"),limit(50));
-  stopStories=onSnapshot(q,snap=>{
-    const stories=snap.docs.map(d=>({id:d.id,...d.data()})).filter(s=>{
-      return !s.expiresAt || !s.expiresAt.toDate || s.expiresAt.toDate().getTime()>Date.now();
-    });
-    const add=`<button class="story" data-add-story><div class="story-ring"><img src="${escapeHTML(currentUser?.photoURL||defaultAvatar)}" alt=""></div>＋ Your story</button>`;
-    $("stories").innerHTML=add+(stories.length?stories.map(s=>`
-      <button class="story" data-story="${escapeHTML(s.id)}">
-        <div class="story-ring"><img src="${escapeHTML(s.authorPhoto||defaultAvatar)}" alt=""></div>
-        ${escapeHTML(s.authorName||"Creator")}
-      </button>`).join(""):`<span class="muted" style="padding:14px 0">No stories yet.</span>`);
-  },e=>{
-    $("stories").innerHTML='<span class="muted">Stories unavailable. Check Firestore rules.</span>';
-    console.error(e);
-  });
-}
-document.addEventListener("click",async e=>{
-  if(e.target.closest("[data-add-story]")) return go("create");
-  const btn=e.target.closest("[data-story]");
-  if(!btn) return;
-  try{
-    const snap=await getDoc(doc(db,"stories",btn.dataset.story));
-    if(!snap.exists()) return toast("Story no longer exists.");
-    const s=snap.data();
-    if(s.expiresAt?.toDate && s.expiresAt.toDate().getTime()<=Date.now()) return toast("This story has expired.");
-    if(s.mediaURL){
-      const w=window.open("","_blank");
-      if(w){
-        w.document.write(s.mediaType==="video"
-          ?`<video src="${escapeHTML(s.mediaURL)}" controls autoplay style="max-width:100%;max-height:90vh"></video>`
-          :`<img src="${escapeHTML(s.mediaURL)}" style="max-width:100%;max-height:90vh">`);
-      } else window.location.href=s.mediaURL;
-    }else toast(s.text||"Story");
-  }catch(err){toast(errorText(err));}
+$("jobsList").addEventListener("click", event => {
+  const apply = event.target.closest("[data-apply]");
+  const cancel = event.target.closest("[data-cancel]");
+  if (apply) $("proposal-form-" + apply.dataset.apply)?.classList.toggle("hidden");
+  if (cancel) $("proposal-form-" + cancel.dataset.cancel)?.classList.add("hidden");
 });
+
+$("jobsList").addEventListener("submit", async event => {
+  const form = event.target.closest("[data-proposal-form]");
+  if (!form) return;
+  event.preventDefault();
+  if (!currentUser) return;
+  const jobId = form.dataset.proposalForm;
+  const message = new FormData(form).get("message").trim();
+  const button = form.querySelector('button[type="submit"]');
+  busy(button, true, "Sending...");
+  try {
+    const job = allJobs.find(j => j.id === jobId);
+    if (!job || job.ownerId === currentUser.uid || job.status !== "open") {
+      throw new Error("Is job par proposal bhejna mumkin nahi.");
+    }
+    if (myProposals.some(p => p.jobId === jobId)) {
+      throw new Error("Aap is job par pehle hi proposal bhej chuke hain.");
+    }
+    await addDoc(collection(db, "proposals"), {
+      jobId, jobTitle:job.title, jobOwnerId:job.ownerId,
+      applicantId:currentUser.uid,
+      applicantName:currentProfile.name || currentUser.displayName || "Member",
+      message, status:"pending", createdAt:serverTimestamp()
+    });
+    status("Proposal submit ho gaya.", "success");
+    await loadProposals();
+    form.classList.add("hidden");
+  } catch(error) {
+    status(explainError(error), "error");
+  } finally {
+    busy(button, false);
+  }
+});
+
+async function loadMyJobs() {
+  if (!currentUser) return;
+  try {
+    const q = query(collection(db, "jobs"), where("ownerId", "==", currentUser.uid));
+    const snapshot = await getDocs(q);
+    const jobs = snapshot.docs.map(d => ({id:d.id, ...d.data()}));
+    jobs.sort((a,b) =>
+      (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0)
+    );
+    $("myJobsList").innerHTML = jobs.length
+      ? jobs.map(j => jobCard(j, true)).join("")
+      : '<p class="small">Aap ne abhi koi job publish nahi ki.</p>';
+  } catch(error) {
+    $("myJobsList").textContent = "";
+    status("Aapki jobs load nahi huin: " + explainError(error), "error");
+  }
+}
+async function loadProposals() {
+  if (!currentUser) return;
+  try {
+    const q = query(collection(db, "proposals"), where("applicantId", "==", currentUser.uid));
+    const snapshot = await getDocs(q);
+    myProposals = snapshot.docs.map(d => ({id:d.id, ...d.data()}));
+    myProposals.sort((a,b) =>
+      (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0)
+    );
+    $("proposalsList").innerHTML = myProposals.length
+      ? myProposals.map(p => `<article class="job">
+          <span class="pill">${esc(p.status || "pending")}</span>
+          <h3>${esc(p.jobTitle || "Job")}</h3>
+          <p>${esc(p.message)}</p>
+          <p class="small">Submitted ${esc(dateText(p.createdAt))}</p>
+        </article>`).join("")
+      : '<p class="small">Aap ne abhi koi proposal nahi bheja.</p>';
+  } catch(error) {
+    $("proposalsList").textContent = "";
+    status("Proposals load nahi huay: " + explainError(error), "error");
+  }
+}
+
+/* Built-in task planner: real generative AI connection nahi */
+$("helperForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const goal = $("goalInput").value.trim();
+  if (!goal) return;
+  const steps = [
+    "Goal ko ek clear result mein likhein.",
+    "Is goal ke liye zaroori 3 skills ya resources identify karein.",
+    "Aaj 30 minute ka ek chhota action complete karein.",
+    "Apne kaam ka sample ya proof tayyar karein.",
+    "Relevant jobs ya customers dhoondein aur progress review karein."
+  ];
+  $("helperResult").innerHTML =
+    `<hr><h3>Your starter plan</h3><p>${esc(goal)}</p><ol>${steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol><p class="small">Yeh general built-in plan hai, AI-generated personalised advice nahi.</p>`;
+  $("helperResult").classList.remove("hidden");
+});
+
+switchAuth("login");
 </script>
 </body>
 </html>
