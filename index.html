@@ -3,532 +3,478 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10152a">
-<title>ZYNORA — Intelligence for Everyone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZYNORA — Made in Mian Abdullah</title>
+<meta name="theme-color" content="#101426">
 <style>
-:root{
- --bg:#0a0e1c;--surface:#121a30;--surface2:#1b2540;
- --text:#f5f7ff;--muted:#9daac7;--line:#293654;
- --purple:#a578ff;--blue:#658bff;--mint:#5be0bd;
-}
+:root{--bg:#0b1020;--panel:#151d33;--panel2:#1b2640;--text:#f6f7ff;--muted:#aab5cf;--blue:#6c7cff;--mint:#64edc1;--border:#2c3855;--red:#ff8292}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 20% 0%,#24224b 0,transparent 45%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
+body{margin:0;background:radial-gradient(ellipse at top,#1c2850 0,#0b1020 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.5;cursor:wait}
-header{height:76px;position:sticky;top:0;z-index:10;background:#0a0e1cf2;backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5%;gap:14px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:2px}
-.logo{width:42px;height:42px;flex-shrink:0}
-.brand-name{font-size:22px}
-.brand small{display:block;font-size:9px;letter-spacing:1.5px;color:var(--muted);margin-top:4px}
-.header-user{font-size:12px;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis}
-main{max-width:1160px;margin:auto;padding:26px 18px 120px}
-.page{animation:fade .2s ease}
-@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
-.hidden{display:none!important}
-.hero{padding:22px 0 26px}
-.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b6a3ff;font-weight:800}
-h1{font-size:clamp(34px,6vw,62px);line-height:1.04;letter-spacing:-2px;margin:14px 0}
-.gradient{background:linear-gradient(100deg,#86a6ff,#c19aff,#74efd0);background-clip:text;color:transparent}
-h2{font-size:24px;margin:0 0 10px}
-h3{font-size:17px;margin:0 0 8px}
-p{line-height:1.65}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 5%;background:#0b1020ee;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900;letter-spacing:1px}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#7184ff,#63ebc1);color:#101426;font-size:23px;font-weight:900}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.3px;margin-top:4px}
+.status{font-size:11px;color:var(--mint);max-width:44%;text-align:right}
+.layout{max-width:1100px;margin:auto;padding:25px 18px 115px}
+.page{display:none;animation:appear .2s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.hero{padding:35px 25px;border:1px solid #43517b;border-radius:26px;background:linear-gradient(125deg,#202d54,#19243d 58%,#163a3e);overflow:hidden}
+.eyebrow{color:var(--mint);font-size:11px;font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(34px,7vw,60px);line-height:1.05;margin:16px 0}
+h2{font-size:26px;margin:0 0 10px}
+h3{margin:0 0 8px}
+p{line-height:1.6;color:var(--muted)}
+.hero p{max-width:600px}
+.btn{border:0;border-radius:12px;padding:12px 16px;background:linear-gradient(120deg,var(--blue),#8e6dff);color:white;font-weight:700}
+.btn.secondary{background:#25314c;border:1px solid #455578}
+.btn.mint{background:var(--mint);color:#101426}
+.btn.danger{background:#572936;color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.card{background:linear-gradient(145deg,#18223a,#111a2d);border:1px solid var(--border);border-radius:19px;padding:19px;min-width:0}
+.card .symbol{font-size:25px;margin-bottom:13px}
+.card p{font-size:13px;margin-bottom:0}
+.section-title{margin:30px 0 12px}
 .muted{color:var(--muted)}
 .small{font-size:12px}
-.card{background:linear-gradient(145deg,#17213a,#101629);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.feature{padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:18px;cursor:pointer;transition:.2s}
-.feature:hover{border-color:#8585ff;transform:translateY(-2px)}
-.feature-icon{font-size:25px;margin-bottom:14px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}
-.stat{background:#18223b;border:1px solid var(--line);padding:14px;border-radius:14px}
-.stat strong{display:block;font-size:23px;margin-bottom:5px}
-button.primary{background:linear-gradient(100deg,var(--blue),var(--purple));border:0;border-radius:11px;color:white;font-weight:750;padding:12px 17px}
-button.secondary{background:#202b47;border:1px solid #354363;color:white;border-radius:11px;padding:11px 14px}
-button.danger{background:#442332;border:1px solid #68364a;color:#ffd9e1;padding:11px 14px;border-radius:10px}
-.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
-label{display:block;font-size:12px;color:#c5cde1;margin:13px 0 6px}
-input,select,textarea{width:100%;padding:13px;background:#0a1122;border:1px solid #34415f;border-radius:11px;color:white;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #658bff20}
-textarea{min-height:110px;resize:vertical}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}
-.notice{padding:13px;border:1px solid var(--line);border-radius:12px;background:#17223b;margin-bottom:15px;font-size:13px;overflow-wrap:anywhere}
-.notice.error{background:#401e2b;color:#ffdae2}
-.notice.ok{background:#12362e;color:#c9ffeb}
-.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;background:#0c1123f5;backdrop-filter:blur(20px);border-top:1px solid var(--line);display:flex;justify-content:center;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom));}
-.nav-inner{width:min(680px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
-.nav-item{border:0;background:transparent;color:#8794b2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8px 3px;border-radius:12px;font-size:10px}
-.nav-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
-.nav-item.active{background:#222c4a;color:#c2b3ff}
-.nav-item.active svg{color:#a997ff}
-.job{border:1px solid var(--line);background:#11192c;border-radius:15px;padding:17px;margin-top:12px}
-.job-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#263458;color:#dbe2ff;font-size:11px;margin:3px 4px 3px 0}
-.empty{border:1px dashed #34415f;padding:22px;text-align:center;border-radius:14px;color:var(--muted);margin-top:12px}
-.chatbox{height:340px;overflow:auto;background:#0a1122;border:1px solid var(--line);border-radius:14px;padding:12px}
-.bubble{padding:12px 14px;border-radius:14px;margin:9px 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;font-size:14px}
-.user-bubble{background:#29355c;margin-left:10%}
-.ai-bubble{background:#1b2940;margin-right:6%}
-footer{text-align:center;font-size:11px;color:#7885a3;padding:25px 5px}
-@media(min-width:900px){main{padding-top:35px}.hero{padding-top:35px}.feature{min-height:150px}}
-@media(max-width:600px){header{height:68px;padding:0 14px}.brand-name{font-size:19px}.logo{width:36px;height:36px}.header-user{max-width:105px}main{padding:17px 12px 110px}.card{padding:17px}.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.stats{gap:7px}.stat{padding:10px}.stat strong{font-size:19px}.nav-item{font-size:9px}.hero{padding-top:17px}}
+.form{display:grid;gap:13px;margin-top:16px}
+label{font-size:13px;color:#d9e0f5;display:grid;gap:7px}
+input,textarea,select{width:100%;border:1px solid #394867;border-radius:11px;padding:12px;background:#0d1528;color:var(--text);min-width:0}
+textarea{min-height:100px;resize:vertical}
+input::placeholder,textarea::placeholder{color:#7786a5}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.notice{padding:12px 14px;border-radius:12px;margin:12px 0;font-size:13px;line-height:1.5;background:#182b3a;border:1px solid #315a58;color:#c8ffed;overflow-wrap:anywhere}
+.notice.error{background:#39202c;border-color:#744052;color:#ffdce2}
+.notice:empty{display:none}
+.job{margin-top:12px}
+.job-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tag{display:inline-block;background:#263453;border:1px solid #3a4c70;border-radius:20px;padding:5px 9px;color:#dbe4ff;font-size:11px;margin:4px 4px 0 0}
+.chatbox{min-height:180px;max-height:380px;overflow:auto;background:#0d1528;border:1px solid var(--border);border-radius:14px;padding:14px}
+.bubble{padding:11px 13px;border-radius:12px;margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5;font-size:14px}
+.bubble.user{background:#28365a;margin-left:12%}
+.bubble.ai{background:#1b2e36;margin-right:8%}
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:20;display:flex;justify-content:center;gap:4px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:#0b1020f5;backdrop-filter:blur(18px);border-top:1px solid var(--border)}
+.nav button{border:0;background:transparent;color:#9caac8;border-radius:12px;padding:9px 14px;min-width:68px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px}
+.nav button .ico{font-size:21px}
+.nav button.active{background:#253052;color:#fff}
+.nav button.active .ico{color:var(--mint)}
+footer{text-align:center;color:#7786a5;font-size:11px;padding:25px 0 5px}
+@media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.layout{padding:17px 13px 110px}.hero{padding:26px 19px}.topbar{padding:10px 14px}.nav{gap:0}.nav button{padding:8px 7px;min-width:0;flex:1;font-size:10px}.nav button .ico{font-size:20px}.split{grid-template-columns:1fr}}
+@media(max-width:400px){.grid{grid-template-columns:1fr}.brand{font-size:17px}.status{font-size:10px}}
 </style>
 </head>
 <body>
-<header>
- <div class="brand">
-  <!-- Original vector logo made for ZYNORA -->
-  <svg class="logo" viewBox="0 0 100 100" aria-label="ZYNORA logo">
-   <defs><linearGradient id="zg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7ca6ff"/><stop offset=".55" stop-color="#b38aff"/><stop offset="1" stop-color="#5be0bd"/></linearGradient></defs>
-   <rect x="3" y="3" width="94" height="94" rx="28" fill="#192340" stroke="#465681" stroke-width="2"/>
-   <path d="M25 30H74L32 70H75" fill="none" stroke="url(#zg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-   <circle cx="74" cy="24" r="5" fill="#5be0bd"/>
-  </svg>
-  <div><div class="brand-name">ZYNORA</div><small>MADE IN MIAN ABDULLAH</small></div>
- </div>
- <div style="display:flex;align-items:center;gap:10px">
-  <span class="header-user" id="userLabel">Guest</span>
-  <button class="secondary" id="authHeader" onclick="go('account')">Sign in</button>
- </div>
+<header class="topbar">
+  <div class="brand"><div class="logo">Z</div><div>ZYNORA<small>MADE IN MIAN ABDULLAH</small></div></div>
+  <div class="status" id="status">Starting app…</div>
 </header>
 
-<main>
- <div id="notice" class="notice hidden" role="status"></div>
-
- <!-- HOME -->
- <section id="home" class="page">
-  <div class="hero">
-   <div class="eyebrow">A smarter world starts here</div>
-   <h1>Your ideas.<br><span class="gradient">Your next chapter.</span></h1>
-   <p class="muted">AI assistance, global job opportunities and a professional profile — together in one workspace.</p>
-   <div class="actions">
-    <button class="primary" onclick="go('ai')">Explore AI</button>
-    <button class="secondary" onclick="go('jobs')">Find opportunities</button>
-   </div>
-  </div>
-  <div class="stats">
-   <div class="stat"><strong id="jobCount">0</strong><span class="small muted">Jobs available</span></div>
-   <div class="stat"><strong id="myJobCount">0</strong><span class="small muted">Jobs posted by you</span></div>
-   <div class="stat"><strong id="appCount">0</strong><span class="small muted">Your applications</span></div>
-  </div>
-  <div class="card">
-   <h2>Discover ZYNORA</h2>
-   <p class="muted">Choose a service to get started. Each section has its own workspace.</p>
-   <div class="grid">
-    <div class="feature" onclick="go('ai')"><div class="feature-icon">✧</div><h3>AI Assistant</h3><p class="muted small">Ask questions, draft content and plan tasks with an AI model.</p></div>
-    <div class="feature" onclick="go('jobs')"><div class="feature-icon">⌕</div><h3>Discover Jobs</h3><p class="muted small">Explore work opportunities by title, category and country.</p></div>
-    <div class="feature" onclick="go('post')"><div class="feature-icon">＋</div><h3>Hire Talent</h3><p class="muted small">Publish a job and receive proposals from applicants.</p></div>
-    <div class="feature" onclick="go('account')"><div class="feature-icon">◉</div><h3>Your Account</h3><p class="muted small">Create your profile and manage your account settings.</p></div>
-   </div>
-  </div>
-  <div class="card"><h2>Latest opportunities</h2><p class="muted small">Recently published jobs from the marketplace.</p><div id="latestJobs"><div class="empty">Loading jobs…</div></div></div>
- </section>
-
- <!-- DISCOVER -->
- <section id="discover" class="page hidden">
-  <div class="card"><div class="eyebrow">Explore</div><h2>Discover opportunities</h2><p class="muted">Search jobs and explore the professional marketplace.</p>
-   <label for="discoverSearch">Search jobs or skills</label><input id="discoverSearch" placeholder="e.g. graphic design, writing">
-   <label for="discoverCountry">Country</label><select id="discoverCountry"></select>
-   <div class="actions"><button class="primary" onclick="go('jobs')">Open jobs marketplace</button></div>
-  </div>
-  <div class="card"><h2>What you can discover</h2><p>• Job opportunities and freelance projects</p><p>• Work by category and location</p><p>• New opportunities shared by members</p><p class="muted small">Listings depend on jobs actually published by users. This is not an external job-search feed.</p></div>
- </section>
-
- <!-- AI -->
- <section id="ai" class="page hidden">
-  <div class="card">
-   <div class="eyebrow">Your intelligent workspace</div><h2>ZYNORA AI Assistant</h2>
-   <p class="muted">Ask for help with writing, ideas, job applications, study or planning.</p>
-   <div id="aiStatus" class="notice">Checking AI connection…</div>
-   <div class="chatbox" id="chatBox" aria-live="polite">
-    <div class="bubble ai-bubble">Welcome to ZYNORA AI. Ask a question below to get started.</div>
-   </div>
-   <form id="aiForm">
-    <label for="aiInput">Your question</label><textarea id="aiInput" required maxlength="4000" placeholder="How can I improve my CV?"></textarea>
-    <div class="actions"><button class="primary" id="aiSend" type="submit">Send to AI</button><button class="secondary" type="button" onclick="clearChat()">Clear chat</button></div>
-   </form>
-   <p class="small muted">AI answers can be incorrect. Do not share passwords, API keys or sensitive information.</p>
-  </div>
- </section>
-
- <!-- JOBS -->
- <section id="jobs" class="page hidden">
-  <div class="card">
-   <div class="eyebrow">Global marketplace</div><h2>Find your next opportunity</h2>
-   <p class="muted">Browse real listings posted by ZYNORA members.</p>
-   <label for="jobSearch">Search</label><input id="jobSearch" placeholder="Job title, skill or description">
-   <div class="formgrid">
-    <div><label for="jobCountry">Country</label><select id="jobCountry"></select></div>
-    <div><label for="jobCategory">Category</label><select id="jobCategory"><option value="">All categories</option><option>Technology</option><option>Design</option><option>Writing</option><option>Marketing</option><option>Sales</option><option>Education</option><option>Customer Support</option><option>Business</option><option>Other</option></select></div>
-   </div>
-   <div class="actions"><button class="primary" onclick="renderJobs()">Search</button><button class="secondary" onclick="resetJobSearch()">Reset</button></div>
-   <div id="jobsList"></div>
-  </div>
- </section>
-
- <!-- POST JOB -->
- <section id="post" class="page hidden">
-  <div class="card"><div class="eyebrow">For employers</div><h2>Publish a job</h2><p class="muted">Describe the role, expected skills and payment terms clearly.</p>
-   <form id="jobForm">
-    <label for="jobTitle">Job title</label><input id="jobTitle" required maxlength="100" placeholder="e.g. Website designer">
-    <div class="formgrid">
-     <div><label for="postCategory">Category</label><select id="postCategory" required><option value="">Choose category</option><option>Technology</option><option>Design</option><option>Writing</option><option>Marketing</option><option>Sales</option><option>Education</option><option>Customer Support</option><option>Business</option><option>Other</option></select></div>
-     <div><label for="postCountry">Country</label><select id="postCountry" required></select></div>
+<main class="layout">
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div>
+      <h1>Think globally.<br>Build your future.</h1>
+      <p>ZYNORA brings people, ideas, AI assistance and job opportunities together in one growing digital community.</p>
+      <div class="actions">
+        <button class="btn" data-go="discover">Explore ZYNORA →</button>
+        <button class="btn secondary" data-go="account">Create an account</button>
+      </div>
     </div>
-    <label for="jobBudget">Budget / payment terms</label><input id="jobBudget" required maxlength="100" placeholder="e.g. $100 fixed price">
-    <label for="jobDescription">Description</label><textarea id="jobDescription" required maxlength="4000" placeholder="Explain the work, skills and deadline"></textarea>
-    <div class="actions"><button class="primary" id="publishJob" type="submit">Publish job</button></div>
-   </form>
-  </div>
- </section>
-
- <!-- APPLICATIONS -->
- <section id="applications" class="page hidden">
-  <div class="card"><div class="eyebrow">Your progress</div><h2>My applications</h2><p class="muted">Review proposals you have submitted to jobs.</p><div id="myApplications"></div></div>
- </section>
-
- <!-- ACCOUNT -->
- <section id="account" class="page hidden">
-  <div class="card" id="authCard">
-   <div class="eyebrow">Welcome to ZYNORA</div><h2 id="authTitle">Create your account</h2><p class="muted">Join the professional workspace and access member features.</p>
-   <form id="authForm">
-    <div id="signupFields">
-     <label for="authName">Full name</label><input id="authName" maxlength="80" placeholder="Your name">
-     <label for="authCountry">Country</label><select id="authCountry"></select>
+    <div class="grid">
+      <article class="card"><div class="symbol">🌍</div><h3>Discover</h3><p>Explore the platform and its available sections.</p><div class="actions"><button class="btn secondary" data-go="discover">Explore</button></div></article>
+      <article class="card"><div class="symbol">✦</div><h3>AI Assistant</h3><p>Ask questions, develop ideas and get writing help.</p><div class="actions"><button class="btn secondary" data-go="ai">Open AI</button></div></article>
+      <article class="card"><div class="symbol">💼</div><h3>Jobs</h3><p>Browse opportunities or publish a job listing.</p><div class="actions"><button class="btn secondary" data-go="jobs">Find jobs</button></div></article>
     </div>
-    <label for="authEmail">Email address</label><input id="authEmail" type="email" required autocomplete="email">
-    <label for="authPassword">Password</label><input id="authPassword" type="password" minlength="6" required autocomplete="current-password">
-    <div class="actions"><button class="primary" id="authSubmit" type="submit">Create account</button><button class="secondary" type="button" id="authToggle">Already have an account? Login</button></div>
-   </form>
-  </div>
-  <div class="card hidden" id="profileCard">
-   <div class="eyebrow">Personal workspace</div><h2>My account</h2><p class="muted">Manage your professional details.</p>
-   <form id="profileForm">
-    <label for="profileName">Full name</label><input id="profileName" required maxlength="80">
-    <label for="profileCountry">Country</label><select id="profileCountry"></select>
-    <label for="profileSkills">Skills</label><input id="profileSkills" maxlength="300" placeholder="Design, writing, coding">
-    <label for="profileBio">About you</label><textarea id="profileBio" maxlength="1000" placeholder="Your experience and goals"></textarea>
-    <p class="small muted" id="profileEmail"></p>
-    <div class="actions"><button class="primary" type="submit">Save profile</button><button class="danger" type="button" onclick="logout()">Log out</button></div>
-   </form>
-  </div>
-  <div class="card"><h2>About ZYNORA</h2><p class="muted">ZYNORA is a digital workspace concept combining AI assistance, professional opportunities and user profiles.</p><p class="small muted">Created by Mian Abdullah. Features depend on your Firebase and AI service configuration.</p></div>
- </section>
+    <h2 class="section-title">Built for possibility</h2>
+    <p>ZYNORA is an early-stage platform. Features that need Firebase must be configured before they can store or retrieve real information.</p>
+  </section>
 
- <footer>ZYNORA © 2026 · MADE IN MIAN ABDULLAH · Think globally. Build responsibly.</footer>
+  <section class="page" id="page-discover">
+    <div class="eyebrow">EXPLORE</div><h1>Discover</h1>
+    <p>Explore the different parts of ZYNORA.</p>
+    <div class="grid">
+      <article class="card"><div class="symbol">✦</div><h3>AI Assistant</h3><p>Get help with ideas, writing and planning.</p><div class="actions"><button class="btn" data-go="ai">Open AI</button></div></article>
+      <article class="card"><div class="symbol">💼</div><h3>Jobs Marketplace</h3><p>View job listings and submit applications.</p><div class="actions"><button class="btn" data-go="jobs">Explore jobs</button></div></article>
+      <article class="card"><div class="symbol">👤</div><h3>Your Account</h3><p>Sign in to use account-based features.</p><div class="actions"><button class="btn" data-go="account">Open account</button></div></article>
+    </div>
+    <div class="notice">More features can be added in later phases. This version does not yet include live video, calls, private messaging or payments.</div>
+  </section>
+
+  <section class="page" id="page-ai">
+    <div class="eyebrow">YOUR CREATIVE PARTNER</div><h1>AI Assistant</h1>
+    <p>Ask a question in English or Roman Urdu. The AI service must be enabled in Firebase for real AI answers.</p>
+    <div class="card">
+      <div id="chatbox" class="chatbox" aria-live="polite"><div class="bubble ai">Hello! I'm the ZYNORA AI Assistant. What would you like help with?</div></div>
+      <form id="aiForm" class="form">
+        <label for="aiInput">Your message</label>
+        <textarea id="aiInput" placeholder="Ask me to explain an idea, write a plan, or help with a task…" required></textarea>
+        <button class="btn" id="aiSend" type="submit">Send message ↗</button>
+      </form>
+      <div id="aiNotice" class="notice"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-jobs">
+    <div class="eyebrow">OPPORTUNITY BOARD</div><h1>Jobs Marketplace</h1>
+    <p>Browse published jobs. Sign in to post a listing or apply.</p>
+    <div id="jobsNotice" class="notice"></div>
+    <div class="card">
+      <h2>Find opportunities</h2>
+      <label for="jobSearch">Search jobs</label>
+      <input id="jobSearch" placeholder="Search by title, skill or country">
+      <div class="actions"><button class="btn" id="refreshJobs" type="button">Refresh jobs</button><button class="btn secondary" data-go="postjob">＋ Post a job</button></div>
+    </div>
+    <div id="jobsList" aria-live="polite"><div class="card job">Loading jobs…</div></div>
+  </section>
+
+  <section class="page" id="page-postjob">
+    <div class="eyebrow">CREATE AN OPPORTUNITY</div><h1>Post a job</h1>
+    <p>Publish a listing for other users to discover.</p>
+    <div id="postNotice" class="notice"></div>
+    <form id="jobForm" class="card form">
+      <label>Job title<input id="jobTitle" required maxlength="100" placeholder="e.g. Graphic Designer"></label>
+      <div class="split">
+        <label>Category<select id="jobCategory" required><option value="Technology">Technology</option><option value="Design">Design</option><option value="Marketing">Marketing</option><option value="Writing">Writing</option><option value="Business">Business</option><option value="Other">Other</option></select></label>
+        <label>Country<select id="jobCountry" required></select></label>
+      </div>
+      <label>Budget or salary<input id="jobBudget" required maxlength="60" placeholder="e.g. $100 per project"></label>
+      <label>Description<textarea id="jobDescription" required minlength="10" maxlength="3000" placeholder="Describe the role, skills and expectations"></textarea></label>
+      <button class="btn" type="submit" id="publishJob">Publish job</button>
+    </form>
+  </section>
+
+  <section class="page" id="page-account">
+    <div class="eyebrow">YOUR ZYNORA IDENTITY</div><h1>Account</h1>
+    <p>Create an account or sign in to access account-based features.</p>
+    <div id="authNotice" class="notice"></div>
+    <div class="card" id="signedOut">
+      <div class="split">
+        <button type="button" class="btn" id="showSignup">Create account</button>
+        <button type="button" class="btn secondary" id="showLogin">Sign in</button>
+      </div>
+      <form id="authForm" class="form">
+        <label id="nameLabel">Your name<input id="displayName" maxlength="60" placeholder="Enter your name"></label>
+        <label>Email address<input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label>Password<input id="password" type="password" minlength="6" autocomplete="current-password" required placeholder="At least 6 characters"></label>
+        <label>Country<select id="userCountry"></select></label>
+        <button class="btn" id="authSubmit" type="submit">Create account</button>
+      </form>
+      <p class="small">Use your own email and password. Your password is handled by Firebase Authentication.</p>
+    </div>
+    <div class="card" id="signedIn" hidden>
+      <div class="symbol">👤</div><h2 id="profileName">Your profile</h2>
+      <p id="profileEmail"></p><p id="profileCountry"></p>
+      <div class="actions"><button class="btn secondary" data-go="jobs">View jobs</button><button class="btn danger" id="logoutBtn">Sign out</button></div>
+    </div>
+  </section>
+
+  <footer>ZYNORA © 2026 · MADE IN MIAN ABDULLAH<br>Think globally. Build responsibly.</footer>
 </main>
 
-<nav class="bottom-nav" aria-label="Main navigation">
- <div class="nav-inner">
-  <button class="nav-item active" data-page="home">
-   <svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-7h6v7"/></svg>Home
-  </button>
-  <button class="nav-item" data-page="discover">
-   <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg>Discover
-  </button>
-  <button class="nav-item" data-page="ai">
-   <svg viewBox="0 0 24 24"><path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9z"/></svg>AI Assistant
-  </button>
-  <button class="nav-item" data-page="jobs">
-   <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/></svg>Jobs
-  </button>
-  <button class="nav-item" data-page="account">
-   <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Account
-  </button>
- </div>
+<nav class="nav" aria-label="Main navigation">
+  <button type="button" class="active" data-go="home"><span class="ico">⌂</span><span>Home</span></button>
+  <button type="button" data-go="discover"><span class="ico">◈</span><span>Discover</span></button>
+  <button type="button" data-go="ai"><span class="ico">✦</span><span>AI Assistant</span></button>
+  <button type="button" data-go="jobs"><span class="ico">▤</span><span>Jobs</span></button>
+  <button type="button" data-go="account"><span class="ico">◎</span><span>Account</span></button>
 </nav>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import {
- getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
- updateProfile, onAuthStateChanged, signOut
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+  getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, signOut, updateProfile
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 import {
- getFirestore, collection, addDoc, getDocs, getDoc, doc, setDoc,
- query, orderBy, limit, where, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-import { getAI, getGenerativeModel, GoogleAIBackend }
- from "https://www.gstatic.com/firebasejs/11.6.0/firebase-ai.js";
+  getFirestore, collection, addDoc, getDocs, query, orderBy,
+  serverTimestamp, limit
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-ai.js";
 
-/* ZYNORA Firebase configuration */
 const firebaseConfig = {
- apiKey: "AIzaSyDWXEZIo11dbkhw69tIwH7BGhPIPRbuebU",
- authDomain: "zynora-a7d7a.firebaseapp.com",
- projectId: "zynora-a7d7a",
- storageBucket: "zynora-a7d7a.firebasestorage.app",
- messagingSenderId: "563576766126",
- appId: "1:563576766126:web:77a83450e5da326f37b73f",
- measurementId: "G-6CMRSS4J62"
+  apiKey: "AIzaSyDWXEZIo11dbkhw69tIwH7BGhPIPRbuebU",
+  authDomain: "zynora-a7d7a.firebaseapp.com",
+  projectId: "zynora-a7d7a",
+  storageBucket: "zynora-a7d7a.firebasestorage.app",
+  messagingSenderId: "563576766126",
+  appId: "1:563576766126:web:77a83450e5da326f37b73f",
+  measurementId: "G-6CMRSS4J62"
 };
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-let aiModel = null;
-let user = null;
-let profile = null;
-let jobs = [];
-let applications = [];
-let authMode = "signup";
 
 const $ = id => document.getElementById(id);
-const countries = [
-"Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan",
-"Bahamas","Bahrain","Bangladesh","Belgium","Bhutan","Brazil","Bulgaria","Cambodia","Cameroon","Canada","Chile","China","Colombia","Costa Rica","Croatia","Cyprus","Czechia","Denmark","Dominican Republic","Ecuador","Egypt","Estonia","Ethiopia","Finland","France","Georgia","Germany","Ghana","Greece","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Libya","Lithuania","Luxembourg","Malaysia","Maldives","Malta","Mexico","Moldova","Mongolia","Morocco","Mozambique","Myanmar","Nepal","Netherlands","New Zealand","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saudi Arabia","Senegal","Serbia","Singapore","Slovakia","Slovenia","Somalia","South Africa","South Korea","Spain","Sri Lanka","Sudan","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Tunisia","Turkey","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
-];
+let auth = null, db = null, aiModel = null, currentUser = null;
+let authMode = "signup", allJobs = [];
+const countries = ["Pakistan","United States","United Kingdom","Saudi Arabia","United Arab Emirates","India","Canada","Australia","Germany","France","Turkey","Bangladesh","Indonesia","Nigeria","South Africa","Other"];
 
-function fillCountries(id, all = false) {
- const el = $(id);
- if (!el) return;
- el.replaceChildren();
- const first = document.createElement("option");
- first.value = "";
- first.textContent = all ? "All countries" : "Select country";
- el.append(first);
- countries.forEach(c => { const o=document.createElement("option");o.value=c;o.textContent=c;el.append(o); });
+function setNotice(id, message, error=false) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = message || "";
+  el.classList.toggle("error", !!error);
 }
-["authCountry","postCountry","profileCountry"].forEach(id=>fillCountries(id));
-fillCountries("jobCountry",true);
-fillCountries("discoverCountry",true);
-$("authCountry").value="Pakistan";
-$("postCountry").value="Pakistan";
-
-function notice(text,type=""){
- $("notice").textContent=text;
- $("notice").className="notice"+(type?" "+type:"");
- $("notice").classList.remove("hidden");
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function clearNotice(){ $("notice").classList.add("hidden"); }
-function errorText(e){
- const known={
- "auth/email-already-in-use":"This email already has an account. Please log in.",
- "auth/invalid-email":"Enter a valid email address.",
- "auth/weak-password":"Use a stronger password with at least 6 characters.",
- "auth/invalid-credential":"Incorrect email or password.",
- "auth/operation-not-allowed":"Enable Email/Password in Firebase Authentication.",
- "permission-denied":"Firestore rejected this request. Check your Firestore rules."
- };
- return known[e?.code]||e?.message||"Something went wrong. Please try again.";
-}
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-
-function go(page){
- if(["post","applications"].includes(page)&&!user){notice("Please sign in to use this feature.");page="account";}
- document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
- $(page).classList.remove("hidden");
- document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- clearNotice();
- if(page==="jobs")renderJobs();
- if(page==="applications")renderApplications();
- if(page==="account")syncAccount();
- if(page==="discover"&&$("discoverSearch").value)$("jobSearch").value=$("discoverSearch").value;
- window.scrollTo({top:0,behavior:"smooth"});
-}
-window.go=go;
-document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
-
-function setAuthMode(mode){
- authMode=mode;
- const signup=mode==="signup";
- $("authTitle").textContent=signup?"Create your account":"Welcome back";
- $("signupFields").classList.toggle("hidden",!signup);
- $("authName").required=signup;
- $("authCountry").required=signup;
- $("authSubmit").textContent=signup?"Create account":"Login";
- $("authToggle").textContent=signup?"Already have an account? Login":"New here? Create account";
-}
-$("authToggle").addEventListener("click",()=>setAuthMode(authMode==="signup"?"login":"signup"));
-
-$("authForm").addEventListener("submit",async e=>{
- e.preventDefault();clearNotice();
- const btn=$("authSubmit");btn.disabled=true;
- try{
-  const email=$("authEmail").value.trim(),password=$("authPassword").value;
-  if(authMode==="signup"){
-   const name=$("authName").value.trim(),country=$("authCountry").value;
-   if(!name||!country)throw new Error("Please enter your name and country.");
-   const cred=await createUserWithEmailAndPassword(auth,email,password);
-   await updateProfile(cred.user,{displayName:name});
-   await setDoc(doc(db,"users",cred.user.uid),{name,country,email,skills:"",bio:"",createdAt:serverTimestamp()});
-   notice("Account created successfully.","ok");
-  }else{
-   await signInWithEmailAndPassword(auth,email,password);
-   notice("Welcome back to ZYNORA.","ok");
+function setStatus(message) { $("status").textContent = message; }
+function fillCountries(id) {
+  const el = $(id);
+  el.innerHTML = "";
+  countries.forEach(country => {
+    const opt = document.createElement("option");
+    opt.value = country; opt.textContent = country;
+    el.appendChild(opt);
+  });
+  if (id === "userCountry") el.value = "Pakistan";
+  if (id === "jobCountry") el.value = "Remote / Worldwide";
+  if (id === "jobCountry") {
+    const opt = document.createElement("option");
+    opt.value = "Remote / Worldwide"; opt.textContent = "Remote / Worldwide";
+    el.insertBefore(opt, el.firstChild);
+    el.value = "Remote / Worldwide";
   }
-  go("home");
- }catch(e){notice(errorText(e),"error");}
- finally{btn.disabled=false;}
+}
+["userCountry","jobCountry"].forEach(fillCountries);
+
+function showPage(name) {
+  const target = $("page-" + name);
+  if (!target) return;
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  target.classList.add("active");
+  document.querySelectorAll(".nav [data-go]").forEach(b => {
+    b.classList.toggle("active", b.dataset.go === name);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+  if (name === "jobs") loadJobs();
+}
+document.addEventListener("click", event => {
+  const button = event.target.closest("[data-go]");
+  if (button) showPage(button.dataset.go);
 });
 
-onAuthStateChanged(auth,async current=>{
- user=current;profile=null;
- $("userLabel").textContent=current?(current.displayName||current.email):"Guest";
- $("authHeader").textContent=current?"My account":"Sign in";
- $("authCard").classList.toggle("hidden",!!current);
- $("profileCard").classList.toggle("hidden",!current);
- if(current){
-  try{
-   const snap=await getDoc(doc(db,"users",current.uid));
-   if(snap.exists())profile=snap.data();
-   else{
-    profile={name:current.displayName||"",country:"Pakistan",skills:"",bio:"",email:current.email};
-    await setDoc(doc(db,"users",current.uid),{...profile,createdAt:serverTimestamp()});
-   }
-  }catch(e){notice("Your account loaded, but profile access failed: "+errorText(e),"error");}
- }
- await refresh();
- syncAccount();
+function updateAuthUI(user) {
+  currentUser = user;
+  $("signedOut").hidden = !!user;
+  $("signedIn").hidden = !user;
+  if (user) {
+    $("profileName").textContent = user.displayName || "ZYNORA Member";
+    $("profileEmail").textContent = user.email || "";
+    $("profileCountry").textContent = "Signed in successfully";
+    setStatus("Signed in");
+  } else {
+    setStatus("Guest mode");
+  }
+}
+function safeError(error) {
+  const code = error?.code || "";
+  const map = {
+    "auth/email-already-in-use":"This email already has an account. Please sign in.",
+    "auth/invalid-email":"Please enter a valid email address.",
+    "auth/weak-password":"Please use a password of at least 6 characters.",
+    "auth/invalid-credential":"Email or password is incorrect.",
+    "auth/operation-not-allowed":"Enable Email/Password sign-in in Firebase Authentication.",
+    "auth/network-request-failed":"Network issue. Check your internet connection.",
+    "permission-denied":"Firebase Firestore rules blocked this action. Check your database rules.",
+    "unavailable":"Firebase is temporarily unavailable. Try again shortly."
+  };
+  return map[code] || `${error?.message || "Unknown error"}${code ? " ("+code+")" : ""}`;
+}
+
+$("showSignup").addEventListener("click", () => setAuthMode("signup"));
+$("showLogin").addEventListener("click", () => setAuthMode("login"));
+function setAuthMode(mode) {
+  authMode = mode;
+  $("nameLabel").hidden = mode === "login";
+  $("displayName").required = mode === "signup";
+  $("authSubmit").textContent = mode === "signup" ? "Create account" : "Sign in";
+  setNotice("authNotice", "");
+}
+
+$("authForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!auth) return setNotice("authNotice","Firebase did not initialize. Check the browser console.",true);
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const name = $("displayName").value.trim();
+  const country = $("userCountry").value;
+  $("authSubmit").disabled = true;
+  setNotice("authNotice", authMode === "signup" ? "Creating your account…" : "Signing you in…");
+  try {
+    if (authMode === "signup") {
+      if (!name) throw new Error("Please enter your name.");
+      const credential = await createUserWithEmailAndPassword(auth,email,password);
+      await updateProfile(credential.user,{displayName:name});
+      updateAuthUI(credential.user);
+      setNotice("authNotice","Account created successfully!");
+    } else {
+      const credential = await signInWithEmailAndPassword(auth,email,password);
+      updateAuthUI(credential.user);
+      setNotice("authNotice","You are signed in!");
+    }
+  } catch (error) {
+    setNotice("authNotice",safeError(error),true);
+  } finally {
+    $("authSubmit").disabled = false;
+  }
 });
 
-window.logout=async function(){
- try{await signOut(auth);profile=null;notice("You have signed out.","ok");go("home");}
- catch(e){notice(errorText(e),"error");}
-};
-function syncAccount(){
- if(!user)return;
- $("profileName").value=profile?.name||user.displayName||"";
- $("profileCountry").value=profile?.country||"Pakistan";
- $("profileSkills").value=profile?.skills||"";
- $("profileBio").value=profile?.bio||"";
- $("profileEmail").textContent="Signed in as "+user.email;
-}
-$("profileForm").addEventListener("submit",async e=>{
- e.preventDefault();if(!user)return;
- const name=$("profileName").value.trim(),country=$("profileCountry").value;
- if(!name||!country)return notice("Please enter your name and country.","error");
- try{
-  const next={name,country,skills:$("profileSkills").value.trim(),bio:$("profileBio").value.trim(),email:user.email};
-  await setDoc(doc(db,"users",user.uid),{...next,updatedAt:serverTimestamp()},{merge:true});
-  await updateProfile(user,{displayName:name});
-  profile={...profile,...next};$("userLabel").textContent=name;
-  notice("Profile saved.","ok");
- }catch(e){notice(errorText(e),"error");}
+$("logoutBtn").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    updateAuthUI(null);
+    setNotice("authNotice","You have signed out.");
+  } catch (error) {
+    setNotice("authNotice",safeError(error),true);
+  }
 });
 
-async function refresh(){
- await Promise.all([loadJobs(),loadApplications()]);
- renderJobs();renderLatest();renderApplications();updateStats();
+async function loadJobs() {
+  if (!db) {
+    $("jobsList").innerHTML = '<div class="card job">Firebase did not initialize. Check your configuration and internet connection.</div>';
+    return;
+  }
+  $("jobsList").innerHTML = '<div class="card job">Loading jobs…</div>';
+  try {
+    const result = await getDocs(query(collection(db,"jobs"),orderBy("createdAt","desc"),limit(100)));
+    allJobs = result.docs.map(doc => ({id:doc.id,...doc.data()}));
+    renderJobs();
+    setNotice("jobsNotice", allJobs.length ? `${allJobs.length} job listing(s) loaded.` : "No jobs published yet. Sign in and post the first listing.");
+  } catch (error) {
+    $("jobsList").innerHTML = '<div class="card job">Could not load jobs. Check Firestore setup and security rules.</div>';
+    setNotice("jobsNotice",safeError(error),true);
+  }
 }
-async function loadJobs(){
- try{
-  const snap=await getDocs(query(collection(db,"jobs"),orderBy("createdAt","desc"),limit(100)));
-  jobs=snap.docs.map(d=>({id:d.id,...d.data()}));
- }catch(e){jobs=[];console.error(e);}
+function renderJobs() {
+  const term = $("jobSearch").value.trim().toLowerCase();
+  const jobs = allJobs.filter(job => [job.title,job.category,job.country,job.description,job.budget].some(v => String(v || "").toLowerCase().includes(term)));
+  const list = $("jobsList");
+  list.replaceChildren();
+  if (!jobs.length) {
+    const empty = document.createElement("div");
+    empty.className = "card job";
+    empty.textContent = "No matching jobs found.";
+    list.appendChild(empty); return;
+  }
+  jobs.forEach(job => {
+    const card = document.createElement("article");
+    card.className = "card job";
+    const title = document.createElement("h3");
+    title.textContent = job.title || "Untitled job";
+    const meta = document.createElement("p");
+    meta.textContent = `${job.category || "Other"} · ${job.country || "Worldwide"} · ${job.budget || "Budget not specified"}`;
+    const description = document.createElement("p");
+    description.textContent = job.description || "";
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = job.ownerName ? `Posted by ${job.ownerName}` : "Community listing";
+    const apply = document.createElement("button");
+    apply.type = "button"; apply.className = "btn secondary";
+    apply.textContent = "Apply";
+    apply.addEventListener("click", () => {
+      if (!currentUser) {
+        showPage("account");
+        setNotice("authNotice","Please sign in before applying.");
+        return;
+      }
+      setNotice("jobsNotice","To apply, contact the job poster using the details they provide in the listing. In-app applications are not enabled in this version.");
+    });
+    card.append(title,meta,description,tag);
+    if (job.ownerId !== currentUser?.uid) {
+      const actions = document.createElement("div");
+      actions.className = "actions"; actions.appendChild(apply); card.appendChild(actions);
+    }
+    list.appendChild(card);
+  });
 }
-async function loadApplications(){
- applications=[];
- if(!user)return;
- try{
-  const snap=await getDocs(query(collection(db,"proposals"),where("applicantId","==",user.uid),limit(100)));
-  applications=snap.docs.map(d=>({id:d.id,...d.data()}));
- }catch(e){console.error(e);}
-}
-function updateStats(){
- $("jobCount").textContent=jobs.length;
- $("myJobCount").textContent=user?jobs.filter(j=>j.ownerId===user.uid).length:0;
- $("appCount").textContent=applications.length;
-}
-function jobHTML(j){
- const own=user&&j.ownerId===user.uid;
- const already=applications.some(a=>a.jobId===j.id);
- return `<article class="job">
- <div class="job-head"><div><h3>${esc(j.title)}</h3><span class="tag">${esc(j.category)}</span><span class="tag">${esc(j.country)}</span></div><span class="tag">${esc(j.budget)}</span></div>
- <p>${esc(j.description)}</p><div class="small muted">Posted by ${esc(j.ownerName||"ZYNORA member")}</div>
- <div class="actions">${own?'<span class="tag">Your job</span>':already?'<span class="tag">Already applied</span>':`<button class="primary" data-apply="${esc(j.id)}">Apply now</button>`}</div>
- </article>`;
-}
-function renderList(id,list){
- $(id).innerHTML=list.length?list.map(jobHTML).join(""):'<div class="empty">No jobs found yet. Try another search or check back later.</div>';
- $(id).querySelectorAll("[data-apply]").forEach(b=>b.addEventListener("click",()=>applyJob(b.dataset.apply)));
-}
-function renderLatest(){renderList("latestJobs",jobs.slice(0,3));}
-window.renderJobs=function(){
- const term=$("jobSearch").value.trim().toLowerCase();
- const country=$("jobCountry").value,category=$("jobCategory").value;
- renderList("jobsList",jobs.filter(j=>{
-  const all=[j.title,j.description,j.country,j.category,j.budget,j.ownerName].join(" ").toLowerCase();
-  return(!term||all.includes(term))&&(!country||j.country===country)&&(!category||j.category===category);
- }));
-};
-window.resetJobSearch=function(){
- $("jobSearch").value="";$("jobCountry").value="";$("jobCategory").value="";renderJobs();
-};
 $("jobSearch").addEventListener("input",renderJobs);
-$("jobCountry").addEventListener("change",renderJobs);
-$("jobCategory").addEventListener("change",renderJobs);
-$("discoverSearch").addEventListener("input",()=>{$("jobSearch").value=$("discoverSearch").value;});
+$("refreshJobs").addEventListener("click",loadJobs);
 
-$("jobForm").addEventListener("submit",async e=>{
- e.preventDefault();if(!user){go("account");return notice("Please sign in first.");}
- const btn=$("publishJob");btn.disabled=true;
- try{
-  const title=$("jobTitle").value.trim(),category=$("postCategory").value,country=$("postCountry").value,budget=$("jobBudget").value.trim(),description=$("jobDescription").value.trim();
-  if(!title||!category||!country||!budget||!description)throw new Error("Complete all job fields.");
-  await addDoc(collection(db,"jobs"),{title,category,country,budget,description,ownerId:user.uid,ownerName:profile?.name||user.displayName||"ZYNORA member",createdAt:serverTimestamp()});
-  $("jobForm").reset();$("postCountry").value=profile?.country||"Pakistan";
-  await refresh();notice("Your job has been published.","ok");go("jobs");
- }catch(e){notice("Could not publish job: "+errorText(e),"error");}
- finally{btn.disabled=false;}
+$("jobForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!currentUser) {
+    showPage("account");
+    setNotice("postNotice","Please sign in before posting a job.",true);
+    return;
+  }
+  if (!db) return setNotice("postNotice","Firebase is not connected.",true);
+  const button = $("publishJob");
+  button.disabled = true;
+  setNotice("postNotice","Publishing your job…");
+  try {
+    await addDoc(collection(db,"jobs"),{
+      title:$("jobTitle").value.trim(),
+      category:$("jobCategory").value,
+      country:$("jobCountry").value,
+      budget:$("jobBudget").value.trim(),
+      description:$("jobDescription").value.trim(),
+      ownerId:currentUser.uid,
+      ownerName:currentUser.displayName || "ZYNORA Member",
+      createdAt:serverTimestamp()
+    });
+    $("jobForm").reset();
+    setNotice("postNotice","Job published successfully!");
+    await loadJobs();
+    showPage("jobs");
+  } catch (error) {
+    setNotice("postNotice",safeError(error),true);
+  } finally {
+    button.disabled = false;
+  }
 });
 
-async function applyJob(id){
- if(!user){go("account");return notice("Please sign in to apply.");}
- const job=jobs.find(j=>j.id===id);
- if(!job)return notice("This job is no longer available.","error");
- if(job.ownerId===user.uid)return notice("You cannot apply to your own job.");
- if(applications.some(a=>a.jobId===id))return notice("You have already applied.");
- const message=prompt("Write your proposal (up to 1500 characters):");
- if(message===null)return;
- if(!message.trim()||message.length>1500)return notice("Write a proposal under 1500 characters.","error");
- try{
-  await addDoc(collection(db,"proposals"),{jobId:id,jobTitle:job.title,jobOwnerId:job.ownerId,applicantId:user.uid,applicantName:profile?.name||user.displayName||"Member",applicantEmail:user.email,message:message.trim(),createdAt:serverTimestamp()});
-  await refresh();notice("Application submitted successfully.","ok");
- }catch(e){notice("Application failed: "+errorText(e),"error");}
+function addBubble(role,text) {
+  const bubble = document.createElement("div");
+  bubble.className = "bubble " + role;
+  bubble.textContent = text;
+  $("chatbox").appendChild(bubble);
+  $("chatbox").scrollTop = $("chatbox").scrollHeight;
 }
-function renderApplications(){
- const el=$("myApplications");
- if(!user){el.innerHTML='<div class="empty">Sign in to view your applications.</div>';return;}
- el.innerHTML=applications.length?applications.map(a=>`<article class="job"><h3>${esc(a.jobTitle)}</h3><p>${esc(a.message)}</p><span class="tag">Submitted</span></article>`).join(""):'<div class="empty">You have not applied for any jobs yet.</div>';
-}
-
-$("aiForm").addEventListener("submit",async e=>{
- e.preventDefault();
- const message=$("aiInput").value.trim();if(!message)return;
- $("aiInput").value="";bubble(message,"user");
- const btn=$("aiSend");btn.disabled=true;
- try{
-  if(!aiModel)throw new Error("AI_NOT_READY");
-  const result=await aiModel.generateContent(message);
-  bubble(result.response.text()||"The AI returned an empty response.","ai");
- }catch(e){
-  console.error(e);
-  bubble(e.message==="AI_NOT_READY"
-   ?"AI is not connected. Enable Firebase AI Logic for this project and ensure your project has the required access and configuration, then reload the page."
-   :"I couldn't get an AI response. Check Firebase AI Logic setup, your model access and the browser console.", "ai");
- }finally{btn.disabled=false;}
+$("aiForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const message = $("aiInput").value.trim();
+  if (!message) return;
+  addBubble("user",message);
+  $("aiInput").value = "";
+  $("aiSend").disabled = true;
+  setNotice("aiNotice","Getting a response…");
+  try {
+    if (!aiModel) throw new Error("AI is not configured yet. Enable Firebase AI Logic in your Firebase Console, then check the SDK and model setup.");
+    const result = await aiModel.generateContent(message);
+    const responseText = result.response.text();
+    addBubble("ai",responseText || "The AI returned an empty response. Please try again.");
+    setNotice("aiNotice","");
+  } catch (error) {
+    const message = safeError(error);
+    addBubble("ai","I couldn't get an AI response. Please check the setup message below.");
+    setNotice("aiNotice",message,true);
+  } finally {
+    $("aiSend").disabled = false;
+  }
 });
-function bubble(text,who){
- const div=document.createElement("div");div.className="bubble "+(who==="user"?"user-bubble":"ai-bubble");div.textContent=text;
- $("chatBox").append(div);$("chatBox").scrollTop=$("chatBox").scrollHeight;
-}
-window.clearChat=function(){
- $("chatBox").replaceChildren();bubble("Chat cleared. Ask a new question whenever you're ready.","ai");
-};
 
-try{
- const ai=getAI(app,{backend:new GoogleAIBackend()});
- aiModel=getGenerativeModel(ai,{model:"gemini-2.5-flash"});
- $("aiStatus").textContent="AI model configured in the page. First enable Firebase AI Logic in the Firebase Console and test a real request.";
-}catch(e){
- console.error("AI setup:",e);
- $("aiStatus").textContent="AI setup needs attention. Enable Firebase AI Logic and check SDK/model access.";
+try {
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  onAuthStateChanged(auth, updateAuthUI);
+  setStatus("Connecting…");
+  try {
+    const ai = getAI(app,{backend:new GoogleAIBackend()});
+    aiModel = getGenerativeModel(ai,{model:"gemini-3.8-flash"});
+  } catch (error) {
+    console.error("AI setup error:",error);
+    setNotice("aiNotice","AI setup failed. Enable Firebase AI Logic and verify the SDK/model configuration.",true);
+  }
+  setStatus("Firebase connected");
+  loadJobs();
+} catch (error) {
+  console.error("Firebase initialization error:",error);
+  setStatus("Setup required");
+  setNotice("authNotice","Firebase could not start: " + safeError(error),true);
+  setNotice("jobsNotice","Firebase could not start. Check the configuration and browser console.",true);
+  $("jobsList").innerHTML = '<div class="card job">Firebase connection failed. Navigation and page design should still work.</div>';
 }
-setAuthMode("signup");
-renderList("latestJobs",[]);
-renderList("jobsList",[]);
 </script>
 </body>
 </html>
